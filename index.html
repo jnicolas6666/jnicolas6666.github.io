@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jean-Nicolas Di Zazzo</title>
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --bg2: #13161e;
+      --bg3: #1a1e28;
+      --accent: #6c8cff;
+      --accent2: #a78bfa;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --border: #1e2535;
+      --success: #34d399;
+      --danger: #f87171;
+      --card: #161923;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,15,20,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem;
+      letter-spacing: 0.04em; transition: color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links .blog-link {
+      color: var(--accent2); border: 1px solid var(--accent2);
+      padding: 4px 12px; border-radius: 20px; font-size: 0.82rem;
+    }
+    .nav-links .blog-link:hover { background: var(--accent2); color: #fff; }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 0 60px; }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      background: radial-gradient(ellipse at 20% 50%, rgba(108,140,255,0.07) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(167,139,250,0.05) 0%, transparent 50%);
+    }
+    .hero-content { padding-top: 60px; }
+    .hero-tag {
+      display: inline-block; padding: 4px 14px; border-radius: 20px;
+      background: rgba(108,140,255,0.12); border: 1px solid rgba(108,140,255,0.3);
+      color: var(--accent); font-size: 0.8rem; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1rem; }
+    h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub { font-size: 1.1rem; color: var(--muted); max-width: 540px; margin-bottom: 2rem; }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+    .pill {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 6px; padding: 5px 14px; font-size: 0.82rem; color: var(--muted);
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      padding: 10px 22px; border-radius: 8px; font-size: 0.9rem;
+      font-weight: 600; text-decoration: none; cursor: pointer;
+      border: none; transition: all .2s; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTION TITLES ── */
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.5rem; font-weight: 600;
+    }
+    h2 { font-size: 1.9rem; font-weight: 700; margin-bottom: 2.5rem; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; line-height: 1.8; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.2rem;
+    }
+    .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .timeline-item { position: relative; margin-bottom: 2.5rem; }
+    .timeline-dot {
+      position: absolute; left: -2rem; top: 6px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+      transform: translateX(-50%); margin-left: 1px;
+    }
+    .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.4rem; }
+    .timeline-company { font-weight: 700; font-size: 1rem; }
+    .timeline-role { color: var(--accent2); font-size: 0.88rem; margin-bottom: 0.6rem; font-style: italic; }
+    .timeline-date {
+      font-size: 0.78rem; color: var(--muted);
+      background: var(--bg3); border: 1px solid var(--border);
+      padding: 2px 10px; border-radius: 20px; white-space: nowrap;
+    }
+    .timeline-bullets { list-style: none; }
+    .timeline-bullets li {
+      color: var(--muted); font-size: 0.88rem; padding: 3px 0 3px 1rem;
+      position: relative; line-height: 1.6;
+    }
+    .timeline-bullets li::before {
+      content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem;
+    }
+    .achievement {
+      display: inline-block; background: rgba(52,211,153,0.08);
+      border: 1px solid rgba(52,211,153,0.2); color: var(--success);
+      border-radius: 4px; padding: 0 6px; font-size: 0.78rem; font-weight: 600;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; }
+    .skill-group {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.4rem;
+    }
+    .skill-group-title { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 0.8rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-tag {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 4px; padding: 3px 10px; font-size: 0.8rem; color: var(--muted);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-grid { display: grid; gap: 1rem; }
+    .edu-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.4rem;
+      display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;
+    }
+    .edu-school { font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
+    .edu-degree { color: var(--accent2); font-size: 0.88rem; margin-bottom: 0.3rem; }
+    .edu-details { color: var(--muted); font-size: 0.82rem; }
+    .edu-year { font-size: 0.8rem; color: var(--muted); text-align: right; white-space: nowrap; }
+    .badge {
+      display: inline-block; padding: 3px 10px; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 600; background: rgba(108,140,255,0.12);
+      border: 1px solid rgba(108,140,255,0.25); color: var(--accent);
+    }
+
+    /* ── BLOG OVERLAY ── */
+    #blog-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: var(--bg); overflow-y: auto;
+    }
+    #blog-overlay.open { display: block; }
+    .blog-nav {
+      position: sticky; top: 0;
+      background: rgba(13,15,20,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    .blog-nav-title {
+      font-weight: 700; font-size: 1rem;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .btn-close {
+      background: none; border: 1px solid var(--border); color: var(--muted);
+      border-radius: 6px; padding: 6px 14px; cursor: pointer; font-size: 0.85rem;
+      transition: all .2s;
+    }
+    .btn-close:hover { border-color: var(--danger); color: var(--danger); }
+
+    /* ── LOGIN ── */
+    #login-screen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: calc(100vh - 60px);
+    }
+    .login-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 380px;
+      text-align: center;
+    }
+    .login-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .login-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .login-card p { color: var(--muted); font-size: 0.88rem; margin-bottom: 1.8rem; }
+    .input-group { margin-bottom: 1rem; text-align: left; }
+    .input-group label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 0.4rem; }
+    .input-group input {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 14px; color: var(--text); font-size: 0.9rem;
+      outline: none; transition: border-color .2s;
+    }
+    .input-group input:focus { border-color: var(--accent); }
+    .login-error { color: var(--danger); font-size: 0.82rem; margin-bottom: 0.8rem; min-height: 1.2em; }
+    .btn-login {
+      width: 100%; padding: 11px; border-radius: 8px; font-size: 0.95rem;
+      font-weight: 600; cursor: pointer; border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; transition: opacity .2s;
+    }
+    .btn-login:hover { opacity: 0.88; }
+
+    /* ── BLOG DASHBOARD ── */
+    #blog-dashboard { display: none; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    .blog-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .blog-header h3 { font-size: 1.4rem; }
+    .btn-new {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; border: none; border-radius: 8px;
+      padding: 9px 18px; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; transition: opacity .2s;
+    }
+    .btn-new:hover { opacity: 0.85; }
+    .posts-list { display: grid; gap: 1rem; }
+    .post-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.4rem;
+      cursor: pointer; transition: border-color .2s;
+    }
+    .post-card:hover { border-color: var(--accent); }
+    .post-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+    .post-card-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; }
+    .post-card-date { font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+    .post-card-preview { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
+    .post-card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+    .post-tag {
+      background: rgba(108,140,255,0.1); border: 1px solid rgba(108,140,255,0.2);
+      color: var(--accent); border-radius: 4px; padding: 2px 8px; font-size: 0.75rem;
+    }
+    .empty-state {
+      text-align: center; padding: 4rem 1rem; color: var(--muted);
+    }
+    .empty-state .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .empty-state p { font-size: 0.9rem; }
+
+    /* ── POST EDITOR ── */
+    #post-editor { display: none; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    .editor-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .btn-back {
+      background: none; border: 1px solid var(--border); color: var(--muted);
+      border-radius: 6px; padding: 7px 14px; cursor: pointer; font-size: 0.85rem;
+      transition: all .2s;
+    }
+    .btn-back:hover { border-color: var(--accent); color: var(--accent); }
+    .editor-title-input {
+      width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border);
+      color: var(--text); font-size: 1.6rem; font-weight: 700;
+      padding: 8px 0; margin-bottom: 1rem; outline: none;
+      font-family: inherit;
+    }
+    .editor-title-input::placeholder { color: var(--border); }
+    .editor-meta { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .editor-meta input {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 6px; padding: 7px 12px; color: var(--text); font-size: 0.85rem;
+      outline: none; flex: 1; min-width: 120px;
+    }
+    .editor-meta input:focus { border-color: var(--accent); }
+    .editor-toolbar {
+      display: flex; gap: 0.4rem; flex-wrap: wrap;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px 8px 0 0; padding: 0.5rem 0.8rem;
+    }
+    .toolbar-btn {
+      background: none; border: 1px solid transparent; color: var(--muted);
+      border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.82rem;
+      transition: all .15s; font-family: inherit;
+    }
+    .toolbar-btn:hover { border-color: var(--border); color: var(--text); background: var(--bg); }
+    #post-body {
+      width: 100%; min-height: 420px; background: var(--bg3);
+      border: 1px solid var(--border); border-top: none;
+      border-radius: 0 0 8px 8px; padding: 1.2rem;
+      color: var(--text); font-size: 0.95rem; line-height: 1.8;
+      outline: none; resize: vertical; font-family: inherit;
+    }
+    .editor-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 0.8rem; }
+    .editor-footer-left { display: flex; gap: 0.6rem; }
+    .btn-save {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; border: none; border-radius: 8px;
+      padding: 9px 22px; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: opacity .2s;
+    }
+    .btn-save:hover { opacity: 0.85; }
+    .btn-delete {
+      background: none; border: 1px solid rgba(248,113,113,0.3); color: var(--danger);
+      border-radius: 8px; padding: 9px 18px; font-size: 0.88rem; cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-delete:hover { background: rgba(248,113,113,0.1); }
+    .save-status { font-size: 0.8rem; color: var(--success); }
+
+    /* ── POST VIEWER ── */
+    #post-viewer { display: none; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    .post-viewer-header { margin-bottom: 2rem; }
+    .post-viewer-title { font-size: 2rem; font-weight: 800; margin-bottom: 0.6rem; }
+    .post-viewer-meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .post-viewer-content {
+      color: var(--text); font-size: 0.98rem; line-height: 1.9;
+      white-space: pre-wrap; word-break: break-word;
+    }
+    .post-viewer-actions { display: flex; gap: 0.8rem; margin-top: 2rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem;
+      color: var(--muted); font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── CHANGE PASSWORD MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.7); align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2rem; width: 100%; max-width: 380px;
+    }
+    .modal h3 { margin-bottom: 1.5rem; }
+
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .edu-card { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─────────────────────────────────────────────────── NAV -->
+<nav>
+  <div class="nav-logo">JN · Di Zazzo</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#" class="blog-link" onclick="openBlog(event)">🔒 Private Journal</a></li>
+  </ul>
+</nav>
+
+<!-- ─────────────────────────────────────────────────── HERO -->
+<section id="about">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tag">Data & Strategy · Montréal</div>
+      <h1>Jean-Nicolas<br><span>Di Zazzo</span></h1>
+      <p class="hero-sub">
+        Senior Data Analyst at <strong>Banque Nationale Courtage Direct</strong> — turning complex data into decisions that move organizations forward. M.Sc. in Business Intelligence from HEC Montréal.
+      </p>
+      <div class="hero-pills">
+        <span class="pill">📊 Data Strategy</span>
+        <span class="pill">🐍 Python · SQL</span>
+        <span class="pill">🤖 AI & Prompt Engineering</span>
+        <span class="pill">📈 Financial Analysis</span>
+        <span class="pill">⚡ Agile / Scrum</span>
+        <span class="pill">💡 Power BI</span>
+      </div>
+      <div class="hero-btns">
+        <a href="CV_Jean-Nicolas_DiZazzo_2025.pdf" target="_blank" class="btn btn-primary">
+          ↓ Download CV
+        </a>
+        <a href="mailto:Jean-Nicolas.bordeleau-di-zazzo@hec.ca" class="btn btn-outline">
+          ✉ Get in Touch
+        </a>
+      </div>
+    </div>
+
+    <div style="margin-top:4rem;">
+      <p class="section-label">About Me</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a data professional with a rare combination of financial acumen, technical depth, and strategic thinking.
+            At BNCD, I act as the right hand of the data department head — owning data strategies, driving deliverables, and bridging the gap between business and analytics.
+          </p>
+          <p>
+            My background spans quantitative finance (HEC), biological sciences (McGill), and business intelligence — which gives me a systems-level perspective on complex problems. I genuinely enjoy building things that save time, reduce costs, and make decisions smarter.
+          </p>
+          <p>
+            Outside of work: AI applications, poker, markets, and the occasional rabbit hole into entrepreneurship.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-num">$110K</div>
+            <div class="stat-label">Annual savings delivered through automation</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">50%</div>
+            <div class="stat-label">Query runtime reduction (billing pipeline)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-label">University degrees across science, finance & BI</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3.7</div>
+            <div class="stat-label">GPA — M.Sc. Business Intelligence</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────── EXPERIENCE -->
+<section id="experience" style="padding-top:40px;">
+  <div class="container">
+    <p class="section-label">Career</p>
+    <h2>Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-company">Banque Nationale Courtage Direct</span>
+          <span class="timeline-date">Feb 2023 – Present</span>
+        </div>
+        <div class="timeline-role">Analyste Principal de la Donnée · Montréal, QC</div>
+        <ul class="timeline-bullets">
+          <li>Lead data strategies supporting executive decision-making; right hand of the Senior Data Director.</li>
+          <li>Hybrid Analyst + Scrum Master role within a departmental analytics ecosystem.</li>
+          <li>Support Product Owner on requirements gathering and project scope definition.</li>
+          <li>Evaluate financial impacts: program profitability, realized gains/losses by product type, vendor contract renewal recommendations.</li>
+          <li><span class="achievement">✦ $110K/yr saved</span> — Automated time-consuming monthly data manipulations via centralized data pipeline.</li>
+          <li><span class="achievement">✦ 50% faster</span> — Optimized SQL billing queries, cutting 10+ hours of processing time.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--accent2);"></div>
+        <div class="timeline-header">
+          <span class="timeline-company">Talent.com</span>
+          <span class="timeline-date">Mar 2021 – Jan 2022</span>
+        </div>
+        <div class="timeline-role">Stagiaire en Finance Corporative</div>
+        <ul class="timeline-bullets">
+          <li>Built financial KPIs and revenue growth metrics to support IPO preparation.</li>
+          <li><span class="achievement">✦ Contract offered</span> — Delivered executive-level analysis presentation at end of internship; received 1-year contract offer.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--muted);"></div>
+        <div class="timeline-header">
+          <span class="timeline-company">A5 Hospitality</span>
+          <span class="timeline-date">2016 – 2023</span>
+        </div>
+        <div class="timeline-role">Bar Manager & Bartender</div>
+        <ul class="timeline-bullets">
+          <li>Team management, operations, client relations, and high-pressure service delivery.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────── SKILLS -->
+<section id="skills" style="padding-top:40px;">
+  <div class="container">
+    <p class="section-label">Toolkit</p>
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Languages & Data</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Excel VBA</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">BI & Visualization</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Power Platform</span>
+          <span class="skill-tag">PL-900</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Project & Workflow</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Agile</span>
+          <span class="skill-tag">Scrum</span>
+          <span class="skill-tag">Jira</span>
+          <span class="skill-tag">Confluence</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">AI & Emerging Tech</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Prompt Engineering</span>
+          <span class="skill-tag">LLM Applications</span>
+          <span class="skill-tag">AI for Business</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Legacy Systems</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AS/400</span>
+          <span class="skill-tag">Kyndryl</span>
+          <span class="skill-tag">Banking Systems</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">French 🇫🇷</span>
+          <span class="skill-tag">English 🇬🇧</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────── EDUCATION -->
+<section id="education" style="padding-top:40px;">
+  <div class="container">
+    <p class="section-label">Academic Background</p>
+    <h2>Education</h2>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-school">HEC Montréal</div>
+          <div class="edu-degree">M.Sc. Business Intelligence</div>
+          <div class="edu-details">GPA 3.7</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="edu-year">2023 – Feb 2025</div>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-school">HEC Montréal</div>
+          <div class="edu-degree">B.A.A. (Honours) — Finance Quantitative</div>
+          <div class="edu-details">CGPA 3.70 · Finance GPA 4.0 · 6 mentions d'excellence</div>
+          <div style="margin-top:0.6rem;">
+            <span class="badge">Incentive & Excellence Scholarship 2022</span>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div class="edu-year">2019 – 2022</div>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-school">McGill University</div>
+          <div class="edu-degree">B.Sc. Genetics & Microbiology</div>
+          <div class="edu-details">Double major in science — foundational analytical mindset</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="edu-year">2015 – 2018</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────── FOOTER -->
+<footer>
+  <p>Jean-Nicolas Di Zazzo · Montréal, QC · (514) 713-8084</p>
+  <p style="margin-top:0.3rem;">Jean-Nicolas.bordeleau-di-zazzo@hec.ca</p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PRIVATE BLOG OVERLAY
+═══════════════════════════════════════════════════════════════ -->
+<div id="blog-overlay">
+  <div class="blog-nav">
+    <span class="blog-nav-title">🔒 Private Journal</span>
+    <div style="display:flex;gap:0.6rem;align-items:center;">
+      <button class="toolbar-btn" onclick="openChangePassword()" style="font-size:0.8rem;">⚙ Password</button>
+      <button class="btn-close" onclick="closeBlog()">✕ Close</button>
+    </div>
+  </div>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-icon">🔐</div>
+      <h3>Private Journal</h3>
+      <p>This space is just for you. Enter your password to continue.</p>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="pw-input" placeholder="Enter password" onkeydown="if(event.key==='Enter') doLogin()"/>
+      </div>
+      <div class="login-error" id="login-error"></div>
+      <button class="btn-login" onclick="doLogin()">Unlock Journal</button>
+      <p style="margin-top:1rem;font-size:0.75rem;color:var(--muted);">Default: <code>jn2025</code> — change it after first login.</p>
+    </div>
+  </div>
+
+  <!-- BLOG DASHBOARD -->
+  <div id="blog-dashboard">
+    <div class="blog-header">
+      <div>
+        <h3>My Journal</h3>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.2rem;" id="post-count-label"></p>
+      </div>
+      <button class="btn-new" onclick="newPost()">✦ New Entry</button>
+    </div>
+    <div class="posts-list" id="posts-list"></div>
+  </div>
+
+  <!-- POST EDITOR -->
+  <div id="post-editor">
+    <div class="editor-header">
+      <button class="btn-back" onclick="backToDashboard()">← Back</button>
+      <span style="color:var(--muted);font-size:0.85rem;" id="edit-mode-label">New Entry</span>
+    </div>
+    <input type="text" class="editor-title-input" id="post-title" placeholder="Entry title..." />
+    <div class="editor-meta">
+      <input type="text" id="post-tags" placeholder="Tags: finance, ideas, career..." />
+    </div>
+    <div class="editor-toolbar">
+      <button class="toolbar-btn" onclick="insertFmt('**','**')"><b>B</b></button>
+      <button class="toolbar-btn" onclick="insertFmt('_','_')"><i>I</i></button>
+      <button class="toolbar-btn" onclick="insertLine('## ')">H2</button>
+      <button class="toolbar-btn" onclick="insertLine('### ')">H3</button>
+      <button class="toolbar-btn" onclick="insertLine('- ')">List</button>
+      <button class="toolbar-btn" onclick="insertLine('> ')">Quote</button>
+      <button class="toolbar-btn" onclick="insertLine('---\n')">──</button>
+    </div>
+    <textarea id="post-body" placeholder="Write your thoughts here..."></textarea>
+    <div class="editor-footer">
+      <div class="editor-footer-left">
+        <button class="btn-save" onclick="savePost()">✓ Save Entry</button>
+        <button class="btn-delete" id="btn-delete-post" onclick="deletePost()" style="display:none;">Delete</button>
+      </div>
+      <span class="save-status" id="save-status"></span>
+    </div>
+  </div>
+
+  <!-- POST VIEWER -->
+  <div id="post-viewer">
+    <div style="display:flex;gap:0.8rem;margin-bottom:1.5rem;align-items:center;">
+      <button class="btn-back" onclick="backToDashboard()">← Back</button>
+    </div>
+    <div class="post-viewer-header">
+      <div class="post-viewer-title" id="viewer-title"></div>
+      <div class="post-viewer-meta" id="viewer-meta"></div>
+      <div class="post-card-tags" id="viewer-tags"></div>
+    </div>
+    <div class="post-viewer-content" id="viewer-content"></div>
+    <div class="post-viewer-actions">
+      <button class="btn-save" onclick="editCurrentPost()">✎ Edit</button>
+      <button class="btn-delete" onclick="deleteCurrentPost()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHANGE PASSWORD MODAL -->
+<div class="modal-overlay" id="pw-modal">
+  <div class="modal">
+    <h3>Change Password</h3>
+    <div class="input-group">
+      <label>Current Password</label>
+      <input type="password" id="pw-current" />
+    </div>
+    <div class="input-group">
+      <label>New Password</label>
+      <input type="password" id="pw-new" />
+    </div>
+    <div class="input-group">
+      <label>Confirm New Password</label>
+      <input type="password" id="pw-confirm" />
+    </div>
+    <div class="login-error" id="pw-modal-error"></div>
+    <div style="display:flex;gap:0.8rem;margin-top:0.5rem;">
+      <button class="btn-save" onclick="changePassword()">Save</button>
+      <button class="btn-close" onclick="closeChangePassword()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── STORAGE KEYS ──
+const KEY_PW    = 'jn_blog_pw';
+const KEY_POSTS = 'jn_blog_posts';
+
+function getPassword() { return localStorage.getItem(KEY_PW) || 'jn2025'; }
+function getPosts()    { return JSON.parse(localStorage.getItem(KEY_POSTS) || '[]'); }
+function savePosts(p)  { localStorage.setItem(KEY_POSTS, JSON.stringify(p)); }
+
+let currentPostId = null;
+
+// ── BLOG OPEN / CLOSE ──
+function openBlog(e) {
+  e.preventDefault();
+  document.getElementById('blog-overlay').classList.add('open');
+  showLogin();
+}
+function closeBlog() {
+  document.getElementById('blog-overlay').classList.remove('open');
+  document.getElementById('pw-input').value = '';
+  document.getElementById('login-error').textContent = '';
+}
+
+// ── SCREENS ──
+function showLogin() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('blog-dashboard').style.display = 'none';
+  document.getElementById('post-editor').style.display = 'none';
+  document.getElementById('post-viewer').style.display = 'none';
+  setTimeout(() => document.getElementById('pw-input').focus(), 100);
+}
+function showDashboard() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('blog-dashboard').style.display = 'block';
+  document.getElementById('post-editor').style.display = 'none';
+  document.getElementById('post-viewer').style.display = 'none';
+  renderPosts();
+}
+function showEditor() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('blog-dashboard').style.display = 'none';
+  document.getElementById('post-editor').style.display = 'block';
+  document.getElementById('post-viewer').style.display = 'none';
+}
+function showViewer() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('blog-dashboard').style.display = 'none';
+  document.getElementById('post-editor').style.display = 'none';
+  document.getElementById('post-viewer').style.display = 'block';
+}
+
+// ── AUTH ──
+function doLogin() {
+  const val = document.getElementById('pw-input').value;
+  if (val === getPassword()) {
+    document.getElementById('login-error').textContent = '';
+    showDashboard();
+  } else {
+    document.getElementById('login-error').textContent = 'Incorrect password. Try again.';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+// ── RENDER POSTS ──
+function renderPosts() {
+  const posts = getPosts().sort((a, b) => b.date - a.date);
+  const list  = document.getElementById('posts-list');
+  const label = document.getElementById('post-count-label');
+  label.textContent = posts.length === 0 ? 'No entries yet.' : `${posts.length} entr${posts.length === 1 ? 'y' : 'ies'}`;
+
+  if (posts.length === 0) {
+    list.innerHTML = `<div class="empty-state">
+      <div class="empty-icon">📓</div>
+      <p>Your journal is empty.<br>Write your first entry.</p>
+    </div>`;
+    return;
+  }
+
+  list.innerHTML = posts.map(p => {
+    const preview = p.body.slice(0, 160).replace(/\n/g, ' ') + (p.body.length > 160 ? '…' : '');
+    const dateStr = new Date(p.date).toLocaleDateString('en-CA', { year:'numeric', month:'short', day:'numeric' });
+    const tags = (p.tags || []).map(t => `<span class="post-tag">${t}</span>`).join('');
+    return `<div class="post-card" onclick="viewPost('${p.id}')">
+      <div class="post-card-header">
+        <div class="post-card-title">${escHtml(p.title || 'Untitled')}</div>
+        <div class="post-card-date">${dateStr}</div>
+      </div>
+      <div class="post-card-preview">${escHtml(preview)}</div>
+      ${tags ? `<div class="post-card-tags">${tags}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ── NEW POST ──
+function newPost() {
+  currentPostId = null;
+  document.getElementById('post-title').value = '';
+  document.getElementById('post-tags').value = '';
+  document.getElementById('post-body').value = '';
+  document.getElementById('edit-mode-label').textContent = 'New Entry';
+  document.getElementById('btn-delete-post').style.display = 'none';
+  document.getElementById('save-status').textContent = '';
+  showEditor();
+  setTimeout(() => document.getElementById('post-title').focus(), 100);
+}
+
+// ── VIEW POST ──
+function viewPost(id) {
+  const posts = getPosts();
+  const p = posts.find(x => x.id === id);
+  if (!p) return;
+  currentPostId = id;
+  document.getElementById('viewer-title').textContent = p.title || 'Untitled';
+  document.getElementById('viewer-meta').textContent = new Date(p.date).toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('viewer-content').textContent = p.body;
+  const tags = (p.tags || []).map(t => `<span class="post-tag">${t}</span>`).join('');
+  document.getElementById('viewer-tags').innerHTML = tags;
+  showViewer();
+}
+
+// ── EDIT POST ──
+function editCurrentPost() {
+  const posts = getPosts();
+  const p = posts.find(x => x.id === currentPostId);
+  if (!p) return;
+  document.getElementById('post-title').value = p.title || '';
+  document.getElementById('post-tags').value = (p.tags || []).join(', ');
+  document.getElementById('post-body').value = p.body || '';
+  document.getElementById('edit-mode-label').textContent = 'Edit Entry';
+  document.getElementById('btn-delete-post').style.display = 'inline-flex';
+  document.getElementById('save-status').textContent = '';
+  showEditor();
+}
+
+// ── SAVE POST ──
+function savePost() {
+  const title = document.getElementById('post-title').value.trim();
+  const body  = document.getElementById('post-body').value;
+  const tags  = document.getElementById('post-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+  if (!title && !body) { document.getElementById('save-status').textContent = 'Nothing to save.'; return; }
+
+  const posts = getPosts();
+  if (currentPostId) {
+    const idx = posts.findIndex(p => p.id === currentPostId);
+    if (idx !== -1) { posts[idx].title = title; posts[idx].body = body; posts[idx].tags = tags; posts[idx].updated = Date.now(); }
+  } else {
+    const newP = { id: 'p' + Date.now(), title, body, tags, date: Date.now() };
+    currentPostId = newP.id;
+    posts.push(newP);
+    document.getElementById('btn-delete-post').style.display = 'inline-flex';
+    document.getElementById('edit-mode-label').textContent = 'Edit Entry';
+  }
+  savePosts(posts);
+  document.getElementById('save-status').textContent = '✓ Saved';
+  setTimeout(() => document.getElementById('save-status').textContent = '', 2500);
+}
+
+// ── DELETE ──
+function deletePost() {
+  if (!currentPostId) return;
+  if (!confirm('Delete this entry permanently?')) return;
+  const posts = getPosts().filter(p => p.id !== currentPostId);
+  savePosts(posts);
+  currentPostId = null;
+  showDashboard();
+}
+function deleteCurrentPost() {
+  if (!confirm('Delete this entry permanently?')) return;
+  const posts = getPosts().filter(p => p.id !== currentPostId);
+  savePosts(posts);
+  currentPostId = null;
+  showDashboard();
+}
+
+// ── BACK ──
+function backToDashboard() { showDashboard(); }
+
+// ── TOOLBAR HELPERS ──
+function insertFmt(before, after) {
+  const ta = document.getElementById('post-body');
+  const s = ta.selectionStart, e = ta.selectionEnd;
+  const sel = ta.value.substring(s, e) || 'text';
+  ta.value = ta.value.substring(0,s) + before + sel + after + ta.value.substring(e);
+  ta.focus(); ta.selectionStart = s + before.length; ta.selectionEnd = s + before.length + sel.length;
+}
+function insertLine(prefix) {
+  const ta = document.getElementById('post-body');
+  const s = ta.selectionStart;
+  const before = ta.value.substring(0, s);
+  const after  = ta.value.substring(s);
+  const nl = before.length > 0 && before[before.length-1] !== '\n' ? '\n' : '';
+  ta.value = before + nl + prefix + after;
+  const pos = before.length + nl.length + prefix.length;
+  ta.focus(); ta.selectionStart = ta.selectionEnd = pos;
+}
+
+// ── CHANGE PASSWORD ──
+function openChangePassword() {
+  document.getElementById('pw-current').value = '';
+  document.getElementById('pw-new').value = '';
+  document.getElementById('pw-confirm').value = '';
+  document.getElementById('pw-modal-error').textContent = '';
+  document.getElementById('pw-modal').classList.add('open');
+}
+function closeChangePassword() { document.getElementById('pw-modal').classList.remove('open'); }
+function changePassword() {
+  const cur  = document.getElementById('pw-current').value;
+  const nw   = document.getElementById('pw-new').value;
+  const conf = document.getElementById('pw-confirm').value;
+  const err  = document.getElementById('pw-modal-error');
+  if (cur !== getPassword()) { err.textContent = 'Current password is incorrect.'; return; }
+  if (nw.length < 4) { err.textContent = 'New password must be at least 4 characters.'; return; }
+  if (nw !== conf) { err.textContent = 'Passwords do not match.'; return; }
+  localStorage.setItem(KEY_PW, nw);
+  closeChangePassword();
+  alert('Password updated successfully.');
+}
+
+// ── UTILS ──
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>
