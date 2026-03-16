@@ -3,452 +3,245 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <!-- SEO -->
   <title>Di Zazzo Consulting — Data Strategy & AI Solutions</title>
   <meta name="description" content="Jean-Nicolas Di Zazzo — Data Strategy, Business Intelligence & AI consulting for financial services. M.Sc. Business Intelligence, HEC Montréal."/>
   <meta name="author" content="Jean-Nicolas Di Zazzo"/>
   <meta name="robots" content="index, follow"/>
-
-  <!-- Open Graph -->
   <meta property="og:title" content="Di Zazzo Consulting"/>
   <meta property="og:description" content="Data Strategy & AI Solutions for Financial Services — Jean-Nicolas Di Zazzo"/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://jnicolas6666.github.io"/>
-
-  <!-- Security headers (meta equivalents) -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
-
-  <!-- Favicon (inline SVG) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0f14'/><text x='16' y='22' font-size='16' text-anchor='middle' fill='%236c8cff' font-family='sans-serif' font-weight='bold'>D</text></svg>"/>
-
   <style>
-    /* ── TOKENS ── */
     :root {
-      --bg:      #0d0f14;
-      --bg2:     #13161e;
-      --bg3:     #1a1e28;
-      --card:    #161923;
-      --border:  #1e2535;
-      --accent:  #6c8cff;
-      --accent2: #a78bfa;
-      --text:    #e2e8f0;
-      --muted:   #8892a4;
-      --success: #34d399;
-      --danger:  #f87171;
-      --warn:    #fbbf24;
+      --bg:#0d0f14; --bg2:#13161e; --bg3:#1a1e28; --card:#161923; --border:#1e2535;
+      --accent:#6c8cff; --accent2:#a78bfa; --text:#e2e8f0; --muted:#8892a4;
+      --success:#34d399; --danger:#f87171; --warn:#fbbf24;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      line-height: 1.6; overflow-x: hidden;
-    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden}
 
-    /* ── SCROLL PROGRESS ── */
-    #scroll-progress {
-      position: fixed; top: 0; left: 0; height: 2px; z-index: 999;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      width: 0%; transition: width 0.1s linear;
-    }
+    /* SCROLL BAR */
+    #sp{position:fixed;top:0;left:0;height:2px;z-index:999;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width .1s linear}
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 2px; left: 0; right: 0; z-index: 100;
-      background: rgba(13,15,20,0.92); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2.5rem; height: 60px;
-    }
-    .nav-logo {
-      font-weight: 800; font-size: 1rem; letter-spacing: 0.02em;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
-    .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: 0.875rem;
-      letter-spacing: 0.03em; transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-journal-btn {
-      background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.3);
-      color: var(--accent2) !important; border-radius: 20px;
-      padding: 5px 14px; font-size: 0.8rem !important; font-weight: 600;
-      cursor: pointer; transition: all .2s !important;
-    }
-    .nav-journal-btn:hover { background: rgba(167,139,250,0.18) !important; color: #fff !important; }
+    /* NAV */
+    nav{position:fixed;top:2px;left:0;right:0;z-index:100;background:rgba(13,15,20,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:60px}
+    .nav-logo{font-weight:800;font-size:1rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}
+    .nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;letter-spacing:.03em;transition:color .2s}
+    .nav-links a:hover{color:var(--text)}
+    .nav-journal-btn{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.3);color:var(--accent2)!important;border-radius:20px;padding:5px 14px;font-size:.8rem!important;font-weight:600;cursor:pointer;transition:all .2s!important}
+    .nav-journal-btn:hover{background:rgba(167,139,250,.18)!important;color:#fff!important}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .hamburger span{width:22px;height:2px;background:var(--muted);border-radius:2px}
+    .mobile-menu{display:none;position:fixed;top:62px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:1.2rem 2rem;z-index:99;flex-direction:column;gap:1rem}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{color:var(--muted);text-decoration:none;font-size:.95rem;padding:4px 0}
+    @media(max-width:700px){.nav-links{display:none}.hamburger{display:flex}}
 
-    /* Mobile hamburger */
-    .nav-hamburger {
-      display: none; flex-direction: column; gap: 5px; cursor: pointer;
-      background: none; border: none; padding: 4px;
-    }
-    .nav-hamburger span { width: 22px; height: 2px; background: var(--muted); border-radius: 2px; transition: all .2s; }
-    .mobile-menu {
-      display: none; position: fixed; top: 62px; left: 0; right: 0;
-      background: var(--bg2); border-bottom: 1px solid var(--border);
-      padding: 1.2rem 2rem; z-index: 99;
-      flex-direction: column; gap: 1rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { color: var(--muted); text-decoration: none; font-size: 0.95rem; padding: 4px 0; }
+    /* LAYOUT */
+    .container{max-width:900px;margin:0 auto;padding:0 2rem}
+    section{padding:110px 0 70px}
+    .lbl{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;font-weight:700}
+    h2{font-size:1.9rem;font-weight:800;margin-bottom:2.5rem}
 
-    @media (max-width: 700px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-    }
+    /* FADE IN */
+    .fi{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+    .fi.v{opacity:1;transform:none}
 
-    /* ── LAYOUT ── */
-    .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
-    section { padding: 110px 0 70px; }
-    .section-label {
-      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 0.5rem; font-weight: 700;
-    }
-    h2 { font-size: 1.9rem; font-weight: 800; margin-bottom: 2.5rem; }
+    /* HERO */
+    #hero{min-height:100vh;display:flex;align-items:center;background:radial-gradient(ellipse at 15% 55%,rgba(108,140,255,.08) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(167,139,250,.06) 0%,transparent 50%)}
+    .hero-wrap{padding-top:60px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 16px;border-radius:20px;background:rgba(108,140,255,.1);border:1px solid rgba(108,140,255,.25);color:var(--accent);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:1.8rem}
+    h1{font-size:clamp(2.4rem,5.5vw,3.8rem);font-weight:900;line-height:1.08;margin-bottom:.5rem}
+    .h1g{background:linear-gradient(135deg,var(--accent) 30%,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero-sub{font-size:1.05rem;color:var(--muted);max-width:520px;margin:1rem 0 1.8rem;line-height:1.75}
+    .pills{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:2.5rem}
+    .pill{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:5px 13px;font-size:.8rem;color:var(--muted)}
+    .btns{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn{padding:11px 24px;border-radius:8px;font-size:.88rem;font-weight:700;text-decoration:none;cursor:pointer;border:none;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
+    .btn-p{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+    .btn-p:hover{opacity:.87;transform:translateY(-2px);box-shadow:0 8px 24px rgba(108,140,255,.25)}
+    .btn-o{background:transparent;color:var(--text);border:1px solid var(--border)}
+    .btn-o:hover{border-color:var(--accent);color:var(--accent)}
 
-    /* ── FADE-IN ANIMATION ── */
-    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
+    /* SERVICES */
+    #services{background:var(--bg2)}
+    .srv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem}
+    .srv-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.6rem;transition:border-color .25s,transform .25s}
+    .srv-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+    .srv-icon{font-size:1.6rem;margin-bottom:.9rem}
+    .srv-title{font-weight:700;font-size:.95rem;margin-bottom:.5rem}
+    .srv-desc{color:var(--muted);font-size:.83rem;line-height:1.65}
 
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh; display: flex; align-items: center;
-      background:
-        radial-gradient(ellipse at 15% 55%, rgba(108,140,255,0.08) 0%, transparent 55%),
-        radial-gradient(ellipse at 85% 20%, rgba(167,139,250,0.06) 0%, transparent 50%);
-    }
-    .hero-wrap { padding-top: 60px; }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 5px 16px; border-radius: 20px;
-      background: rgba(108,140,255,0.1); border: 1px solid rgba(108,140,255,0.25);
-      color: var(--accent); font-size: 0.78rem; letter-spacing: 0.12em;
-      text-transform: uppercase; font-weight: 700; margin-bottom: 1.8rem;
-    }
-    h1 { font-size: clamp(2.4rem, 5.5vw, 3.8rem); font-weight: 900; line-height: 1.08; margin-bottom: 0.5rem; }
-    .h1-brand {
-      background: linear-gradient(135deg, var(--accent) 30%, var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero-tagline { font-size: 1.05rem; color: var(--muted); max-width: 520px; margin: 1rem 0 1.8rem; line-height: 1.75; }
-    .hero-pills { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-bottom: 2.5rem; }
-    .pill {
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 6px; padding: 5px 13px; font-size: 0.8rem; color: var(--muted);
-    }
-    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn {
-      padding: 11px 24px; border-radius: 8px; font-size: 0.88rem; font-weight: 700;
-      text-decoration: none; cursor: pointer; border: none;
-      transition: all .2s; display: inline-flex; align-items: center; gap: 7px;
-    }
-    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
-    .btn-primary:hover { opacity: 0.87; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,140,255,0.25); }
-    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    /* ABOUT */
+    .about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:3.5rem;align-items:start}
+    .about-text p{color:var(--muted);margin-bottom:1rem;line-height:1.85;font-size:.95rem}
+    .stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem;transition:border-color .2s}
+    .stat:hover{border-color:var(--accent)}
+    .stat-n{font-size:1.9rem;font-weight:900;color:var(--accent)}
+    .stat-l{font-size:.78rem;color:var(--muted);margin-top:3px;line-height:1.4}
 
-    /* ── SERVICES ── */
-    #services { background: var(--bg2); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; }
-    .service-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-      padding: 1.6rem; transition: border-color .25s, transform .25s;
-    }
-    .service-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .service-icon { font-size: 1.6rem; margin-bottom: 0.9rem; }
-    .service-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.5rem; }
-    .service-desc { color: var(--muted); font-size: 0.83rem; line-height: 1.65; }
+    /* TIMELINE */
+    .timeline{position:relative;padding-left:2rem}
+    .timeline::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:var(--border)}
+    .tl-item{position:relative;margin-bottom:2.8rem}
+    .tl-dot{position:absolute;left:-2rem;top:6px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);transform:translateX(-50%);margin-left:1px}
+    .tl-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.35rem}
+    .tl-co{font-weight:800;font-size:1rem}
+    .tl-role{color:var(--accent2);font-size:.87rem;margin-bottom:.65rem;font-style:italic}
+    .tl-date{font-size:.76rem;color:var(--muted);background:var(--bg3);border:1px solid var(--border);padding:2px 10px;border-radius:20px;white-space:nowrap}
+    .tl-ul{list-style:none}
+    .tl-ul li{color:var(--muted);font-size:.87rem;padding:3px 0 3px 1rem;position:relative;line-height:1.65}
+    .tl-ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.75rem}
+    .ach{display:inline-block;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.22);color:var(--success);border-radius:4px;padding:0 6px;font-size:.77rem;font-weight:700}
 
-    /* ── ABOUT ── */
-    .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3.5rem; align-items: start; }
-    .about-text p { color: var(--muted); margin-bottom: 1rem; line-height: 1.85; font-size: 0.95rem; }
-    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .stat-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem;
-      transition: border-color .2s;
-    }
-    .stat-card:hover { border-color: var(--accent); }
-    .stat-num { font-size: 1.9rem; font-weight: 900; color: var(--accent); }
-    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+    /* SKILLS */
+    #skills{background:var(--bg2)}
+    .sk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.1rem}
+    .sk-g{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.4rem}
+    .sk-title{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:700;margin-bottom:.8rem}
+    .sk-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+    .sk-tag{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:3px 10px;font-size:.79rem;color:var(--muted)}
 
-    /* ── EXPERIENCE ── */
-    .timeline { position: relative; padding-left: 2rem; }
-    .timeline::before {
-      content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
-      width: 1px; background: var(--border);
-    }
-    .timeline-item { position: relative; margin-bottom: 2.8rem; }
-    .timeline-dot {
-      position: absolute; left: -2rem; top: 6px; width: 10px; height: 10px;
-      border-radius: 50%; background: var(--accent); border: 2px solid var(--bg);
-      transform: translateX(-50%); margin-left: 1px;
-    }
-    .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem; }
-    .timeline-company { font-weight: 800; font-size: 1rem; }
-    .timeline-role { color: var(--accent2); font-size: 0.87rem; margin-bottom: 0.65rem; font-style: italic; }
-    .timeline-date {
-      font-size: 0.76rem; color: var(--muted); background: var(--bg3);
-      border: 1px solid var(--border); padding: 2px 10px; border-radius: 20px; white-space: nowrap;
-    }
-    .timeline-bullets { list-style: none; }
-    .timeline-bullets li {
-      color: var(--muted); font-size: 0.87rem; padding: 3px 0 3px 1rem;
-      position: relative; line-height: 1.65;
-    }
-    .timeline-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem; }
-    .achievement {
-      display: inline-block; background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.22);
-      color: var(--success); border-radius: 4px; padding: 0 6px; font-size: 0.77rem; font-weight: 700;
-    }
+    /* EDUCATION */
+    .edu-grid{display:grid;gap:1rem}
+    .edu-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;transition:border-color .2s}
+    .edu-card:hover{border-color:var(--accent)}
+    .edu-school{font-weight:800;font-size:1rem;margin-bottom:.25rem}
+    .edu-deg{color:var(--accent2);font-size:.88rem;margin-bottom:.3rem}
+    .edu-det{color:var(--muted);font-size:.82rem}
+    .edu-yr{font-size:.8rem;color:var(--muted);text-align:right;white-space:nowrap}
+    .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.74rem;font-weight:700;background:rgba(108,140,255,.1);border:1px solid rgba(108,140,255,.25);color:var(--accent)}
 
-    /* ── SKILLS ── */
-    #skills { background: var(--bg2); }
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.1rem; }
-    .skill-group { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; }
-    .skill-group-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); font-weight: 700; margin-bottom: 0.8rem; }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .skill-tag { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 3px 10px; font-size: 0.79rem; color: var(--muted); }
+    /* CONTACT */
+    #contact{background:var(--bg2)}
+    .ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .ct-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.6rem;display:flex;align-items:flex-start;gap:1rem}
+    .ct-icon{font-size:1.4rem;margin-top:2px}
+    .ct-lbl{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem}
+    .ct-val{font-weight:600;font-size:.92rem;color:var(--text);text-decoration:none}
+    .ct-val:hover{color:var(--accent)}
 
-    /* ── EDUCATION ── */
-    .edu-grid { display: grid; gap: 1rem; }
-    .edu-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-      padding: 1.5rem; display: flex; justify-content: space-between;
-      align-items: flex-start; flex-wrap: wrap; gap: 1rem;
-      transition: border-color .2s;
-    }
-    .edu-card:hover { border-color: var(--accent); }
-    .edu-school { font-weight: 800; font-size: 1rem; margin-bottom: 0.25rem; }
-    .edu-degree { color: var(--accent2); font-size: 0.88rem; margin-bottom: 0.3rem; }
-    .edu-details { color: var(--muted); font-size: 0.82rem; }
-    .edu-year { font-size: 0.8rem; color: var(--muted); text-align: right; white-space: nowrap; }
-    .badge {
-      display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.74rem; font-weight: 700;
-      background: rgba(108,140,255,0.1); border: 1px solid rgba(108,140,255,0.25); color: var(--accent);
-    }
+    /* FOOTER */
+    footer{text-align:center;padding:2.5rem 1rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
+    footer a{color:var(--muted);text-decoration:none}
+    footer a:hover{color:var(--accent)}
 
-    /* ── CONTACT ── */
-    #contact { background: var(--bg2); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .contact-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-      padding: 1.6rem; display: flex; align-items: flex-start; gap: 1rem;
-    }
-    .contact-icon { font-size: 1.4rem; margin-top: 2px; }
-    .contact-label { font-size: 0.76rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
-    .contact-value { font-weight: 600; font-size: 0.92rem; color: var(--text); text-decoration: none; }
-    .contact-value:hover { color: var(--accent); }
+    @media(max-width:640px){.about-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.edu-card{flex-direction:column}.ct-grid{grid-template-columns:1fr}}
 
-    /* ── FOOTER ── */
-    footer {
-      text-align: center; padding: 2.5rem 1rem;
-      color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border);
-    }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--accent); }
+    /* ════════════════════════════════════════
+       JOURNAL OVERLAY
+    ════════════════════════════════════════ */
+    #jo{display:none;position:fixed;inset:0;z-index:200;background:var(--bg);overflow-y:auto}
+    #jo.open{display:block}
+    .j-nav{position:sticky;top:0;background:rgba(13,15,20,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px}
+    .j-logo{font-weight:800;font-size:.95rem;background:linear-gradient(135deg,var(--accent2),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .j-nav-r{display:flex;gap:.6rem;align-items:center}
 
-    /* ══════════════════════════════════════════════════════
-       PRIVATE JOURNAL OVERLAY
-    ══════════════════════════════════════════════════════ */
-    #blog-overlay {
-      display: none; position: fixed; inset: 0; z-index: 200;
-      background: var(--bg); overflow-y: auto;
-    }
-    #blog-overlay.open { display: block; }
+    /* AUTH SCREENS */
+    .ascreen{display:flex;align-items:flex-start;justify-content:center;min-height:calc(100vh - 60px);padding:3rem 1rem}
+    .acard{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:2.5rem;width:100%;max-width:440px}
+    .acard h3{font-size:1.25rem;margin-bottom:.4rem}
+    .acard .asub{color:var(--muted);font-size:.86rem;margin-bottom:1.8rem;line-height:1.6}
+    .fg{margin-bottom:1rem}
+    .fg label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:.4rem;font-weight:600;letter-spacing:.04em}
+    .fg input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:.9rem;outline:none;transition:border-color .2s;font-family:inherit}
+    .fg input:focus{border-color:var(--accent)}
+    .fg .hint{font-size:.75rem;color:var(--muted);margin-top:.35rem;line-height:1.5}
+    .ferr{color:var(--danger);font-size:.81rem;margin-bottom:.9rem;min-height:1.1em}
+    .btn-auth{width:100%;padding:11px;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;transition:opacity .2s;font-family:inherit}
+    .btn-auth:hover{opacity:.88}
+    .btn-auth:disabled{opacity:.4;cursor:not-allowed}
+    .tab-row{display:flex;gap:.5rem;margin-bottom:1.8rem}
+    .tab{flex:1;padding:8px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;font-size:.85rem;font-weight:600;font-family:inherit;transition:all .2s}
+    .tab.active{background:var(--bg3);border-color:var(--accent);color:var(--text)}
+    .lockout-bar{color:var(--warn);font-size:.82rem;text-align:center;margin-top:.6rem}
 
-    .blog-nav {
-      position: sticky; top: 0;
-      background: rgba(13,15,20,0.96); backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2rem; height: 60px;
-    }
-    .blog-nav-logo {
-      font-weight: 800; font-size: 0.95rem;
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .blog-nav-right { display: flex; gap: 0.6rem; align-items: center; }
+    /* LOADING */
+    .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 1rem;gap:1rem;color:var(--muted);font-size:.9rem}
+    .spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
 
-    /* ── Auth screens ── */
-    .auth-screen {
-      display: flex; align-items: center; justify-content: center;
-      min-height: calc(100vh - 60px); padding: 2rem;
-    }
-    .auth-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 18px; padding: 2.5rem; width: 100%; max-width: 390px; text-align: center;
-    }
-    .auth-icon { font-size: 2.8rem; margin-bottom: 1.2rem; }
-    .auth-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-    .auth-card .sub { color: var(--muted); font-size: 0.87rem; margin-bottom: 2rem; line-height: 1.6; }
-    .form-group { margin-bottom: 1rem; text-align: left; }
-    .form-group label { display: block; font-size: 0.79rem; color: var(--muted); margin-bottom: 0.4rem; font-weight: 600; letter-spacing: 0.04em; }
-    .form-group input {
-      width: 100%; background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 8px; padding: 10px 14px; color: var(--text); font-size: 0.9rem;
-      outline: none; transition: border-color .2s; font-family: inherit;
-    }
-    .form-group input:focus { border-color: var(--accent); }
-    .form-error { color: var(--danger); font-size: 0.81rem; margin-bottom: 0.9rem; min-height: 1.1em; }
-    .form-warn  { color: var(--warn);   font-size: 0.81rem; margin-bottom: 0.9rem; }
-    .btn-auth {
-      width: 100%; padding: 11px; border-radius: 8px; font-size: 0.95rem; font-weight: 700;
-      cursor: pointer; border: none;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff; transition: opacity .2s; font-family: inherit;
-    }
-    .btn-auth:hover { opacity: 0.88; }
-    .btn-auth:disabled { opacity: 0.45; cursor: not-allowed; }
-    .lockout-msg { color: var(--warn); font-size: 0.83rem; margin-top: 0.6rem; }
+    /* TOAST */
+    #toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(2rem);background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.7rem 1.4rem;font-size:.85rem;z-index:500;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    #toast.err{border-color:var(--danger);color:var(--danger)}
+    #toast.ok{border-color:var(--success);color:var(--success)}
 
-    /* ── Blog dashboard ── */
-    #blog-dashboard { display: none; padding: 2rem; max-width: 820px; margin: 0 auto; }
-    .blog-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
-    }
-    .blog-header-left h3 { font-size: 1.4rem; }
-    .blog-header-left .sub { color: var(--muted); font-size: 0.84rem; margin-top: 0.2rem; }
-    .btn-new {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff; border: none; border-radius: 8px;
-      padding: 9px 20px; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: opacity .2s;
-      font-family: inherit;
-    }
-    .btn-new:hover { opacity: 0.86; }
-    .posts-list { display: grid; gap: 1rem; }
-    .post-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-      padding: 1.4rem; cursor: pointer; transition: border-color .2s, transform .2s;
-    }
-    .post-card:hover { border-color: var(--accent); transform: translateY(-1px); }
-    .post-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.4rem; }
-    .post-card-title { font-weight: 700; font-size: 1rem; }
-    .post-card-date  { font-size: 0.77rem; color: var(--muted); white-space: nowrap; }
-    .post-card-preview { color: var(--muted); font-size: 0.84rem; line-height: 1.6; }
-    .post-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
-    .post-tag {
-      background: rgba(108,140,255,0.08); border: 1px solid rgba(108,140,255,0.2);
-      color: var(--accent); border-radius: 4px; padding: 2px 8px; font-size: 0.74rem;
-    }
-    .empty-state { text-align: center; padding: 4rem 1rem; color: var(--muted); }
-    .empty-state .ei { font-size: 3rem; margin-bottom: 1rem; }
+    /* DASHBOARD */
+    #j-dash{display:none;padding:2rem;max-width:820px;margin:0 auto}
+    .j-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+    .j-head h3{font-size:1.4rem}
+    .j-head .sub{color:var(--muted);font-size:.84rem;margin-top:.2rem}
+    .btn-new{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:.88rem;font-weight:700;cursor:pointer;transition:opacity .2s;font-family:inherit}
+    .btn-new:hover{opacity:.86}
+    .posts{display:grid;gap:1rem}
+    .pc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.4rem;cursor:pointer;transition:border-color .2s,transform .2s}
+    .pc:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .pc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.4rem}
+    .pc-title{font-weight:700;font-size:1rem}
+    .pc-date{font-size:.77rem;color:var(--muted);white-space:nowrap}
+    .pc-prev{color:var(--muted);font-size:.84rem;line-height:1.6}
+    .ptags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem}
+    .ptag{background:rgba(108,140,255,.08);border:1px solid rgba(108,140,255,.2);color:var(--accent);border-radius:4px;padding:2px 8px;font-size:.74rem}
+    .empty{text-align:center;padding:4rem 1rem;color:var(--muted)}
+    .empty .ei{font-size:3rem;margin-bottom:1rem}
 
-    /* ── Editor ── */
-    #post-editor { display: none; padding: 2rem; max-width: 820px; margin: 0 auto; }
-    .editor-topbar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.8rem; flex-wrap: wrap; }
-    .btn-back {
-      background: none; border: 1px solid var(--border); color: var(--muted);
-      border-radius: 6px; padding: 7px 14px; cursor: pointer; font-size: 0.84rem;
-      transition: all .2s; font-family: inherit;
-    }
-    .btn-back:hover { border-color: var(--accent); color: var(--accent); }
-    .editor-mode { color: var(--muted); font-size: 0.84rem; }
-    .editor-title {
-      width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border);
-      color: var(--text); font-size: 1.65rem; font-weight: 800; padding: 8px 0;
-      margin-bottom: 1rem; outline: none; font-family: inherit;
-    }
-    .editor-title::placeholder { color: var(--border); }
-    .editor-meta-row { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
-    .editor-meta-row input {
-      background: var(--bg3); border: 1px solid var(--border); border-radius: 6px;
-      padding: 7px 12px; color: var(--text); font-size: 0.84rem;
-      outline: none; flex: 1; min-width: 140px; font-family: inherit;
-    }
-    .editor-meta-row input:focus { border-color: var(--accent); }
-    .editor-toolbar {
-      display: flex; gap: 0.35rem; flex-wrap: wrap;
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 8px 8px 0 0; padding: 0.5rem 0.7rem;
-    }
-    .tbtn {
-      background: none; border: 1px solid transparent; color: var(--muted);
-      border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.81rem;
-      transition: all .15s; font-family: inherit;
-    }
-    .tbtn:hover { border-color: var(--border); color: var(--text); background: var(--bg); }
-    #post-body {
-      width: 100%; min-height: 440px; background: var(--bg3);
-      border: 1px solid var(--border); border-top: none;
-      border-radius: 0 0 8px 8px; padding: 1.2rem;
-      color: var(--text); font-size: 0.94rem; line-height: 1.85;
-      outline: none; resize: vertical; font-family: inherit;
-    }
-    .editor-footer {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-top: 1rem; flex-wrap: wrap; gap: 0.8rem;
-    }
-    .editor-footer-left { display: flex; gap: 0.6rem; }
-    .btn-save {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff; border: none; border-radius: 8px;
-      padding: 9px 22px; font-size: 0.9rem; font-weight: 700;
-      cursor: pointer; transition: opacity .2s; font-family: inherit;
-    }
-    .btn-save:hover { opacity: 0.85; }
-    .btn-del {
-      background: none; border: 1px solid rgba(248,113,113,0.3); color: var(--danger);
-      border-radius: 8px; padding: 9px 18px; font-size: 0.87rem; cursor: pointer;
-      transition: all .2s; font-family: inherit;
-    }
-    .btn-del:hover { background: rgba(248,113,113,0.1); }
-    .save-status { font-size: 0.79rem; color: var(--success); }
+    /* EDITOR */
+    #j-edit{display:none;padding:2rem;max-width:820px;margin:0 auto}
+    .etop{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem;flex-wrap:wrap}
+    .etitle{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);font-size:1.65rem;font-weight:800;padding:8px 0;margin-bottom:1rem;outline:none;font-family:inherit}
+    .etitle::placeholder{color:var(--border)}
+    .emeta{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+    .emeta input{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:7px 12px;color:var(--text);font-size:.84rem;outline:none;flex:1;min-width:140px;font-family:inherit}
+    .emeta input:focus{border-color:var(--accent)}
+    .etoolbar{display:flex;gap:.35rem;flex-wrap:wrap;background:var(--bg3);border:1px solid var(--border);border-radius:8px 8px 0 0;padding:.5rem .7rem}
+    .tb{background:none;border:1px solid transparent;color:var(--muted);border-radius:4px;padding:4px 10px;cursor:pointer;font-size:.81rem;transition:all .15s;font-family:inherit}
+    .tb:hover{border-color:var(--border);color:var(--text);background:var(--bg)}
+    #pbody{width:100%;min-height:440px;background:var(--bg3);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:1.2rem;color:var(--text);font-size:.94rem;line-height:1.85;outline:none;resize:vertical;font-family:inherit}
+    .efoot{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;flex-wrap:wrap;gap:.8rem}
+    .efoot-l{display:flex;gap:.6rem}
+    .btn-save{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:8px;padding:9px 22px;font-size:.9rem;font-weight:700;cursor:pointer;transition:opacity .2s;font-family:inherit}
+    .btn-save:hover{opacity:.85}
+    .btn-save:disabled{opacity:.4;cursor:not-allowed}
+    .btn-del{background:none;border:1px solid rgba(248,113,113,.3);color:var(--danger);border-radius:8px;padding:9px 18px;font-size:.87rem;cursor:pointer;transition:all .2s;font-family:inherit}
+    .btn-del:hover{background:rgba(248,113,113,.1)}
+    .sstatus{font-size:.79rem;color:var(--success)}
 
-    /* ── Viewer ── */
-    #post-viewer { display: none; padding: 2rem; max-width: 820px; margin: 0 auto; }
-    .viewer-title { font-size: 2.1rem; font-weight: 900; margin-bottom: 0.5rem; }
-    .viewer-meta  { color: var(--muted); font-size: 0.84rem; margin-bottom: 1rem; }
-    .viewer-body  { color: var(--text); font-size: 0.97rem; line-height: 1.9; white-space: pre-wrap; word-break: break-word; }
-    .viewer-actions { display: flex; gap: 0.8rem; margin-top: 2rem; }
+    /* VIEWER */
+    #j-view{display:none;padding:2rem;max-width:820px;margin:0 auto}
+    .vt{font-size:2.1rem;font-weight:900;margin-bottom:.5rem}
+    .vm{color:var(--muted);font-size:.84rem;margin-bottom:1rem}
+    .vb{color:var(--text);font-size:.97rem;line-height:1.9;white-space:pre-wrap;word-break:break-word}
+    .vact{display:flex;gap:.8rem;margin-top:2rem}
 
-    /* ── Change password modal ── */
-    .modal-bg {
-      display: none; position: fixed; inset: 0; z-index: 300;
-      background: rgba(0,0,0,0.72); align-items: center; justify-content: center; padding: 1rem;
-    }
-    .modal-bg.open { display: flex; }
-    .modal {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 2rem; width: 100%; max-width: 390px;
-    }
-    .modal h3 { margin-bottom: 1.5rem; }
+    /* MODAL */
+    .modal-bg{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:1rem}
+    .modal-bg.open{display:flex}
+    .modal{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;width:100%;max-width:390px}
+    .modal h3{margin-bottom:1.5rem}
 
-    /* ── Shared btn-close / btn-outline-sm ── */
-    .btn-close {
-      background: none; border: 1px solid var(--border); color: var(--muted);
-      border-radius: 6px; padding: 6px 14px; cursor: pointer; font-size: 0.83rem;
-      transition: all .2s; font-family: inherit;
-    }
-    .btn-close:hover { border-color: var(--danger); color: var(--danger); }
-    .btn-sm {
-      background: none; border: 1px solid var(--border); color: var(--muted);
-      border-radius: 6px; padding: 5px 12px; cursor: pointer; font-size: 0.79rem;
-      transition: all .2s; font-family: inherit;
-    }
-    .btn-sm:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* ── Responsive ── */
-    @media (max-width: 640px) {
-      .about-grid    { grid-template-columns: 1fr; }
-      .about-stats   { grid-template-columns: 1fr 1fr; }
-      .edu-card      { flex-direction: column; }
-      .contact-grid  { grid-template-columns: 1fr; }
-    }
+    /* SHARED BTNS */
+    .btn-close{background:none;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:6px 14px;cursor:pointer;font-size:.83rem;transition:all .2s;font-family:inherit}
+    .btn-close:hover{border-color:var(--danger);color:var(--danger)}
+    .btn-sm{background:none;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 12px;cursor:pointer;font-size:.79rem;transition:all .2s;font-family:inherit}
+    .btn-sm:hover{border-color:var(--accent);color:var(--accent)}
+    .btn-back{background:none;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:7px 14px;cursor:pointer;font-size:.84rem;transition:all .2s;font-family:inherit}
+    .btn-back:hover{border-color:var(--accent);color:var(--accent)}
+    .emode{color:var(--muted);font-size:.84rem}
   </style>
 </head>
 <body>
 
-<!-- Scroll progress bar -->
-<div id="scroll-progress"></div>
+<div id="sp"></div>
+<div id="toast"></div>
 
-<!-- ─────────────────────── NAV ─────────────────────── -->
+<!-- NAV -->
 <nav>
   <a class="nav-logo" href="#hero">Di Zazzo Consulting</a>
   <ul class="nav-links">
@@ -458,36 +251,30 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#" class="nav-journal-btn" id="open-journal-btn">🔒 Journal</a></li>
+    <li><a href="#" class="nav-journal-btn" id="open-j">🔒 Journal</a></li>
   </ul>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+  <button class="hamburger" id="hbg" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-
-<!-- Mobile menu -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#services"   class="mm-link">Services</a>
-  <a href="#about"      class="mm-link">About</a>
-  <a href="#experience" class="mm-link">Experience</a>
-  <a href="#skills"     class="mm-link">Skills</a>
-  <a href="#education"  class="mm-link">Education</a>
-  <a href="#contact"    class="mm-link">Contact</a>
-  <a href="#"           class="mm-link" id="open-journal-mobile">🔒 Private Journal</a>
+<div class="mobile-menu" id="mm">
+  <a href="#services"   class="mml">Services</a>
+  <a href="#about"      class="mml">About</a>
+  <a href="#experience" class="mml">Experience</a>
+  <a href="#skills"     class="mml">Skills</a>
+  <a href="#education"  class="mml">Education</a>
+  <a href="#contact"    class="mml">Contact</a>
+  <a href="#" class="mml" id="open-j-m">🔒 Private Journal</a>
 </div>
 
-<!-- ─────────────────────── HERO ─────────────────────── -->
+<!-- HERO -->
 <section id="hero">
   <div class="container">
-    <div class="hero-wrap fade-in">
-      <div class="hero-eyebrow">
-        <span>●</span> Montréal · Data & AI Consulting
-      </div>
-      <h1>Di Zazzo<br><span class="h1-brand">Consulting</span></h1>
-      <p class="hero-tagline">
-        Data strategy, business intelligence &amp; AI automation — built for financial services organizations that need decisions, not just dashboards.
-      </p>
-      <div class="hero-pills">
+    <div class="hero-wrap fi">
+      <div class="eyebrow"><span>●</span> Montréal · Data & AI Consulting</div>
+      <h1>Di Zazzo<br><span class="h1g">Consulting</span></h1>
+      <p class="hero-sub">Data strategy, business intelligence &amp; AI automation — built for financial services organizations that need decisions, not just dashboards.</p>
+      <div class="pills">
         <span class="pill">📊 Data Strategy</span>
         <span class="pill">🤖 AI &amp; Automation</span>
         <span class="pill">📈 Financial Analytics</span>
@@ -495,823 +282,841 @@
         <span class="pill">⚡ Power BI</span>
         <span class="pill">🔄 Agile / Scrum</span>
       </div>
-      <div class="hero-btns">
-        <a href="CV_Jean-Nicolas_DiZazzo_2025.pdf" target="_blank" rel="noopener" class="btn btn-primary">
-          ↓ Download CV
-        </a>
-        <a href="#contact" class="btn btn-outline">Let's Talk</a>
+      <div class="btns">
+        <a href="CV_Jean-Nicolas_DiZazzo_2025.pdf" target="_blank" rel="noopener" class="btn btn-p">↓ Download CV</a>
+        <a href="#contact" class="btn btn-o">Let's Talk</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────────────── SERVICES ─────────────────────── -->
+<!-- SERVICES -->
 <section id="services">
   <div class="container">
-    <div class="fade-in">
-      <p class="section-label">What I Do</p>
-      <h2>Services</h2>
-    </div>
-    <div class="services-grid">
-      <div class="service-card fade-in">
-        <div class="service-icon">📊</div>
-        <div class="service-title">Data Strategy & Analytics</div>
-        <div class="service-desc">End-to-end data pipeline design, SQL optimization, and automated reporting frameworks that save analyst hours every month.</div>
-      </div>
-      <div class="service-card fade-in">
-        <div class="service-icon">📉</div>
-        <div class="service-title">Business Intelligence</div>
-        <div class="service-desc">Power BI dashboards, KPI frameworks, and executive-ready reporting — turning raw data into clear narratives for leadership.</div>
-      </div>
-      <div class="service-card fade-in">
-        <div class="service-icon">🤖</div>
-        <div class="service-title">AI & Process Automation</div>
-        <div class="service-desc">LLM integration, prompt engineering, and workflow automation using Python and Power Platform to eliminate manual, repetitive work.</div>
-      </div>
-      <div class="service-card fade-in">
-        <div class="service-icon">🏦</div>
-        <div class="service-title">Financial Data Analysis</div>
-        <div class="service-desc">Profitability analysis, realized gain/loss modeling, vendor contract evaluation, and program financial impact assessment.</div>
-      </div>
+    <div class="fi"><p class="lbl">What I Do</p><h2>Services</h2></div>
+    <div class="srv-grid">
+      <div class="srv-card fi"><div class="srv-icon">📊</div><div class="srv-title">Data Strategy & Analytics</div><div class="srv-desc">End-to-end pipeline design, SQL optimization, and automated reporting that saves analyst hours every month.</div></div>
+      <div class="srv-card fi"><div class="srv-icon">📉</div><div class="srv-title">Business Intelligence</div><div class="srv-desc">Power BI dashboards, KPI frameworks, and executive-ready reporting — turning raw data into clear narratives for leadership.</div></div>
+      <div class="srv-card fi"><div class="srv-icon">🤖</div><div class="srv-title">AI & Process Automation</div><div class="srv-desc">LLM integration, prompt engineering, and workflow automation to eliminate manual, repetitive work at scale.</div></div>
+      <div class="srv-card fi"><div class="srv-icon">🏦</div><div class="srv-title">Financial Data Analysis</div><div class="srv-desc">Profitability analysis, realized gain/loss modeling, vendor contract evaluation, and program financial impact assessment.</div></div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────────────── ABOUT ─────────────────────── -->
+<!-- ABOUT -->
 <section id="about">
   <div class="container">
-    <div class="fade-in">
-      <p class="section-label">The Person Behind It</p>
-      <h2>About</h2>
-    </div>
-    <div class="about-grid fade-in">
+    <div class="fi"><p class="lbl">The Person Behind It</p><h2>About</h2></div>
+    <div class="about-grid fi">
       <div class="about-text">
-        <p>
-          I'm Jean-Nicolas Di Zazzo — a data professional with a rare combination of quantitative finance, biological science, and business intelligence training. Currently serving as <strong>Analyste Principal de la Donnée</strong> at Banque Nationale Courtage Direct, where I act as the right hand of the Senior Data Director.
-        </p>
-        <p>
-          I specialize in bridging the gap between business strategy and technical execution — owning data initiatives from requirements to delivery, in Agile environments where both analytical rigor and communication skills matter equally.
-        </p>
-        <p>
-          My edge: I've built automation that saved <strong>$110K/year</strong>, optimized billing pipelines by <strong>50%</strong>, and presented financial analyses directly to executive committees. I don't just run queries — I make sure the results drive action.
-        </p>
-        <p>
-          Outside the office: AI experiments, financial markets, poker strategy, and entrepreneurship.
-        </p>
+        <p>I'm Jean-Nicolas Di Zazzo — a data professional with a rare combination of quantitative finance, biological science, and business intelligence training. Currently <strong>Analyste Principal de la Donnée</strong> at Banque Nationale Courtage Direct, right hand of the Senior Data Director.</p>
+        <p>I specialize in bridging the gap between business strategy and technical execution — owning data initiatives from requirements to delivery, in Agile environments where analytical rigor and communication skills matter equally.</p>
+        <p>Built automation that saved <strong>$110K/year</strong>, optimized billing pipelines by <strong>50%</strong>, and presented financial analyses directly to executive committees. I don't just run queries — I make sure results drive action.</p>
+        <p>Outside the office: AI experiments, financial markets, poker strategy, and entrepreneurship.</p>
       </div>
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-num">$110K</div>
-          <div class="stat-label">Annual savings via pipeline automation</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">50%</div>
-          <div class="stat-label">Billing query runtime reduction</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">3</div>
-          <div class="stat-label">University degrees: Science · Finance · BI</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">3.7</div>
-          <div class="stat-label">GPA — M.Sc. Business Intelligence</div>
-        </div>
+      <div class="stats">
+        <div class="stat"><div class="stat-n">$110K</div><div class="stat-l">Annual savings via pipeline automation</div></div>
+        <div class="stat"><div class="stat-n">50%</div><div class="stat-l">Billing query runtime reduction</div></div>
+        <div class="stat"><div class="stat-n">3</div><div class="stat-l">University degrees: Science · Finance · BI</div></div>
+        <div class="stat"><div class="stat-n">3.7</div><div class="stat-l">GPA — M.Sc. Business Intelligence</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────────────── EXPERIENCE ─────────────────────── -->
-<section id="experience" style="padding-top:50px;">
+<!-- EXPERIENCE -->
+<section id="experience" style="padding-top:50px">
   <div class="container">
-    <div class="fade-in">
-      <p class="section-label">Career</p>
-      <h2>Experience</h2>
-    </div>
+    <div class="fi"><p class="lbl">Career</p><h2>Experience</h2></div>
     <div class="timeline">
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-dot"></div>
-        <div class="timeline-header">
-          <span class="timeline-company">Banque Nationale Courtage Direct</span>
-          <span class="timeline-date">Feb 2023 – Present</span>
-        </div>
-        <div class="timeline-role">Analyste Principal de la Donnée · Montréal, QC</div>
-        <ul class="timeline-bullets">
-          <li>Lead departmental data strategies to support executive decision-making; right hand of the Senior Data Director.</li>
+      <div class="tl-item fi">
+        <div class="tl-dot"></div>
+        <div class="tl-head"><span class="tl-co">Banque Nationale Courtage Direct</span><span class="tl-date">Feb 2023 – Present</span></div>
+        <div class="tl-role">Analyste Principal de la Donnée · Montréal, QC</div>
+        <ul class="tl-ul">
+          <li>Lead departmental data strategies supporting executive decision-making; right hand of the Senior Data Director.</li>
           <li>Hybrid Analyst + Scrum Master in a departmental analytics ecosystem.</li>
-          <li>Support Product Owner on requirements gathering and project scope definition with finance and marketing partners.</li>
-          <li>Financial impact evaluations: program profitability, realized gains/losses by product type, vendor contract renewal recommendations.</li>
-          <li><span class="achievement">✦ $110K/yr saved</span> — Centralized multi-source data and automated time-consuming monthly management reports.</li>
-          <li><span class="achievement">✦ 50% faster</span> — Optimized SQL billing pipeline, eliminating 10+ hours of processing and manual manipulation.</li>
+          <li>Support Product Owner on requirements and scope definition with finance and marketing partners.</li>
+          <li>Financial impact evaluations: program profitability, realized gains/losses by product, vendor contract recommendations.</li>
+          <li><span class="ach">✦ $110K/yr saved</span> — Centralized multi-source data and automated monthly management reports.</li>
+          <li><span class="ach">✦ 50% faster</span> — Optimized SQL billing pipeline, eliminating 10+ hours of processing time.</li>
         </ul>
       </div>
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-dot" style="background:var(--accent2)"></div>
-        <div class="timeline-header">
-          <span class="timeline-company">Talent.com</span>
-          <span class="timeline-date">Mar 2021 – Jan 2022</span>
-        </div>
-        <div class="timeline-role">Stagiaire en Finance Corporative</div>
-        <ul class="timeline-bullets">
+      <div class="tl-item fi">
+        <div class="tl-dot" style="background:var(--accent2)"></div>
+        <div class="tl-head"><span class="tl-co">Talent.com</span><span class="tl-date">Mar 2021 – Jan 2022</span></div>
+        <div class="tl-role">Stagiaire en Finance Corporative</div>
+        <ul class="tl-ul">
           <li>Built financial KPIs and revenue growth metrics in support of the company's IPO preparation.</li>
-          <li><span class="achievement">✦ Contract offered</span> — Delivered executive-level analysis at end of internship; received a 1-year contract offer.</li>
+          <li><span class="ach">✦ Contract offered</span> — Delivered executive-level analysis at end of internship; received a 1-year contract offer.</li>
         </ul>
       </div>
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-dot" style="background:var(--muted)"></div>
-        <div class="timeline-header">
-          <span class="timeline-company">A5 Hospitality</span>
-          <span class="timeline-date">2016 – 2023</span>
-        </div>
-        <div class="timeline-role">Bar Manager &amp; Bartender</div>
-        <ul class="timeline-bullets">
-          <li>Team leadership, operations management, high-volume client service, and P&amp;L awareness.</li>
-        </ul>
+      <div class="tl-item fi">
+        <div class="tl-dot" style="background:var(--muted)"></div>
+        <div class="tl-head"><span class="tl-co">A5 Hospitality</span><span class="tl-date">2016 – 2023</span></div>
+        <div class="tl-role">Bar Manager &amp; Bartender</div>
+        <ul class="tl-ul"><li>Team leadership, operations management, high-volume client service, and P&amp;L awareness.</li></ul>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ─────────────────────── SKILLS ─────────────────────── -->
+<!-- SKILLS -->
 <section id="skills">
   <div class="container">
-    <div class="fade-in">
-      <p class="section-label">Toolkit</p>
-      <h2>Skills</h2>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-group fade-in">
-        <div class="skill-group-title">Languages & Data</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">SQL</span>
-          <span class="skill-tag">Excel VBA</span>
-        </div>
-      </div>
-      <div class="skill-group fade-in">
-        <div class="skill-group-title">BI & Visualization</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Power BI</span>
-          <span class="skill-tag">Power Platform</span>
-          <span class="skill-tag">PL-900</span>
-        </div>
-      </div>
-      <div class="skill-group fade-in">
-        <div class="skill-group-title">Project & Agile</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Agile</span>
-          <span class="skill-tag">Scrum</span>
-          <span class="skill-tag">Jira</span>
-          <span class="skill-tag">Confluence</span>
-        </div>
-      </div>
-      <div class="skill-group fade-in">
-        <div class="skill-group-title">AI & Emerging Tech</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Prompt Engineering</span>
-          <span class="skill-tag">LLM Applications</span>
-          <span class="skill-tag">AI for Business</span>
-        </div>
-      </div>
-      <div class="skill-group fade-in">
-        <div class="skill-group-title">Legacy & Banking Systems</div>
-        <div class="skill-tags">
-          <span class="skill-tag">AS/400</span>
-          <span class="skill-tag">Kyndryl</span>
-          <span class="skill-tag">Financial Systems</span>
-        </div>
-      </div>
-      <div class="skill-group fade-in">
-        <div class="skill-group-title">Languages</div>
-        <div class="skill-tags">
-          <span class="skill-tag">French 🇫🇷</span>
-          <span class="skill-tag">English 🇬🇧</span>
-        </div>
-      </div>
+    <div class="fi"><p class="lbl">Toolkit</p><h2>Skills</h2></div>
+    <div class="sk-grid">
+      <div class="sk-g fi"><div class="sk-title">Languages & Data</div><div class="sk-tags"><span class="sk-tag">Python</span><span class="sk-tag">SQL</span><span class="sk-tag">Excel VBA</span></div></div>
+      <div class="sk-g fi"><div class="sk-title">BI & Visualization</div><div class="sk-tags"><span class="sk-tag">Power BI</span><span class="sk-tag">Power Platform</span><span class="sk-tag">PL-900</span></div></div>
+      <div class="sk-g fi"><div class="sk-title">Project & Agile</div><div class="sk-tags"><span class="sk-tag">Agile</span><span class="sk-tag">Scrum</span><span class="sk-tag">Jira</span><span class="sk-tag">Confluence</span></div></div>
+      <div class="sk-g fi"><div class="sk-title">AI & Emerging Tech</div><div class="sk-tags"><span class="sk-tag">Prompt Engineering</span><span class="sk-tag">LLM Applications</span><span class="sk-tag">AI for Business</span></div></div>
+      <div class="sk-g fi"><div class="sk-title">Legacy & Banking</div><div class="sk-tags"><span class="sk-tag">AS/400</span><span class="sk-tag">Kyndryl</span><span class="sk-tag">Financial Systems</span></div></div>
+      <div class="sk-g fi"><div class="sk-title">Languages</div><div class="sk-tags"><span class="sk-tag">French 🇫🇷</span><span class="sk-tag">English 🇬🇧</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────────────── EDUCATION ─────────────────────── -->
-<section id="education" style="padding-top:50px;">
+<!-- EDUCATION -->
+<section id="education" style="padding-top:50px">
   <div class="container">
-    <div class="fade-in">
-      <p class="section-label">Academic Background</p>
-      <h2>Education</h2>
-    </div>
+    <div class="fi"><p class="lbl">Academic Background</p><h2>Education</h2></div>
     <div class="edu-grid">
-      <div class="edu-card fade-in">
-        <div>
-          <div class="edu-school">HEC Montréal</div>
-          <div class="edu-degree">M.Sc. Business Intelligence</div>
-          <div class="edu-details">GPA 3.7</div>
-        </div>
-        <div class="edu-year">2023 – Feb 2025</div>
-      </div>
-      <div class="edu-card fade-in">
-        <div>
-          <div class="edu-school">HEC Montréal</div>
-          <div class="edu-degree">B.A.A. (Honours) — Finance Quantitative</div>
-          <div class="edu-details">CGPA 3.70 · Finance GPA 4.0 · 6 mentions d'excellence</div>
-          <div style="margin-top:0.6rem;"><span class="badge">Incentive &amp; Excellence Scholarship 2022</span></div>
-        </div>
-        <div class="edu-year">2019 – 2022</div>
-      </div>
-      <div class="edu-card fade-in">
-        <div>
-          <div class="edu-school">McGill University</div>
-          <div class="edu-degree">B.Sc. Genetics &amp; Microbiology</div>
-          <div class="edu-details">Foundational systems-level analytical thinking</div>
-        </div>
-        <div class="edu-year">2015 – 2018</div>
-      </div>
+      <div class="edu-card fi"><div><div class="edu-school">HEC Montréal</div><div class="edu-deg">M.Sc. Business Intelligence</div><div class="edu-det">GPA 3.7</div></div><div class="edu-yr">2023 – Feb 2025</div></div>
+      <div class="edu-card fi"><div><div class="edu-school">HEC Montréal</div><div class="edu-deg">B.A.A. (Honours) — Finance Quantitative</div><div class="edu-det">CGPA 3.70 · Finance GPA 4.0 · 6 mentions d'excellence</div><div style="margin-top:.6rem"><span class="badge">Incentive &amp; Excellence Scholarship 2022</span></div></div><div class="edu-yr">2019 – 2022</div></div>
+      <div class="edu-card fi"><div><div class="edu-school">McGill University</div><div class="edu-deg">B.Sc. Genetics &amp; Microbiology</div><div class="edu-det">Foundational systems-level analytical thinking</div></div><div class="edu-yr">2015 – 2018</div></div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────────────── CONTACT ─────────────────────── -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="container">
-    <div class="fade-in">
-      <p class="section-label">Get in Touch</p>
-      <h2>Contact</h2>
-    </div>
-    <div class="contact-grid fade-in">
-      <div class="contact-card">
-        <div class="contact-icon">✉</div>
-        <div>
-          <div class="contact-label">Email</div>
-          <a href="mailto:Jean-Nicolas.bordeleau-di-zazzo@hec.ca" class="contact-value">Jean-Nicolas.bordeleau-di-zazzo@hec.ca</a>
-        </div>
-      </div>
-      <div class="contact-card">
-        <div class="contact-icon">📍</div>
-        <div>
-          <div class="contact-label">Location</div>
-          <span class="contact-value">Montréal, QC — Open to remote &amp; hybrid</span>
-        </div>
-      </div>
-      <div class="contact-card">
-        <div class="contact-icon">📞</div>
-        <div>
-          <div class="contact-label">Phone</div>
-          <a href="tel:+15147138084" class="contact-value">(514) 713-8084</a>
-        </div>
-      </div>
-      <div class="contact-card">
-        <div class="contact-icon">💻</div>
-        <div>
-          <div class="contact-label">GitHub</div>
-          <a href="https://github.com/jnicolas6666" target="_blank" rel="noopener" class="contact-value">github.com/jnicolas6666</a>
-        </div>
-      </div>
+    <div class="fi"><p class="lbl">Get in Touch</p><h2>Contact</h2></div>
+    <div class="ct-grid fi">
+      <div class="ct-card"><div class="ct-icon">✉</div><div><div class="ct-lbl">Email</div><a href="mailto:Jean-Nicolas.bordeleau-di-zazzo@hec.ca" class="ct-val">Jean-Nicolas.bordeleau-di-zazzo@hec.ca</a></div></div>
+      <div class="ct-card"><div class="ct-icon">📍</div><div><div class="ct-lbl">Location</div><span class="ct-val">Montréal, QC — Open to remote &amp; hybrid</span></div></div>
+      <div class="ct-card"><div class="ct-icon">📞</div><div><div class="ct-lbl">Phone</div><a href="tel:+15147138084" class="ct-val">(514) 713-8084</a></div></div>
+      <div class="ct-card"><div class="ct-icon">💻</div><div><div class="ct-lbl">GitHub</div><a href="https://github.com/jnicolas6666" target="_blank" rel="noopener" class="ct-val">github.com/jnicolas6666</a></div></div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────────────── FOOTER ─────────────────────── -->
 <footer>
   <p>© 2025 Di Zazzo Consulting · Jean-Nicolas Di Zazzo · Montréal, QC</p>
-  <p style="margin-top:0.4rem;">
-    <a href="mailto:Jean-Nicolas.bordeleau-di-zazzo@hec.ca">Jean-Nicolas.bordeleau-di-zazzo@hec.ca</a>
-    &nbsp;·&nbsp;
-    <a href="https://github.com/jnicolas6666" target="_blank" rel="noopener">GitHub</a>
-    &nbsp;·&nbsp;
+  <p style="margin-top:.4rem">
+    <a href="mailto:Jean-Nicolas.bordeleau-di-zazzo@hec.ca">Jean-Nicolas.bordeleau-di-zazzo@hec.ca</a> &nbsp;·&nbsp;
+    <a href="https://github.com/jnicolas6666" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp;
     <a href="CV_Jean-Nicolas_DiZazzo_2025.pdf" target="_blank" rel="noopener">CV</a>
   </p>
 </footer>
 
-<!-- ═══════════════════════════════════════════════════
-     PRIVATE JOURNAL OVERLAY
-═══════════════════════════════════════════════════ -->
-<div id="blog-overlay" role="dialog" aria-modal="true" aria-label="Private Journal">
-
-  <div class="blog-nav">
-    <span class="blog-nav-logo">🔒 Private Journal</span>
-    <div class="blog-nav-right" id="blog-nav-right">
-      <!-- Populated by JS when unlocked -->
-      <button class="btn-close" id="close-journal-btn">✕ Close</button>
+<!-- ════════════════════════════════════════
+     PRIVATE JOURNAL
+════════════════════════════════════════ -->
+<div id="jo" role="dialog" aria-modal="true" aria-label="Private Journal">
+  <div class="j-nav">
+    <span class="j-logo">🔒 Private Journal</span>
+    <div class="j-nav-r" id="j-nav-r">
+      <button class="btn-close" id="close-j">✕ Close</button>
     </div>
   </div>
 
-  <!-- 1. FIRST-TIME SETUP -->
-  <div class="auth-screen" id="screen-setup" style="display:none;">
-    <div class="auth-card">
-      <div class="auth-icon">🛡️</div>
-      <h3>Create Your Password</h3>
-      <p class="sub">First time here. Set a personal password to protect your journal. It is stored as a secure hash — never as plaintext.</p>
-      <div class="form-group">
-        <label>New Password <span style="color:var(--muted)">(min. 8 chars)</span></label>
-        <input type="password" id="setup-pw1" autocomplete="new-password"/>
+  <!-- SETUP / LOGIN SCREEN -->
+  <div class="ascreen" id="s-auth">
+    <div class="acard">
+      <div class="tab-row" id="auth-tabs">
+        <button class="tab active" id="tab-new" >New Journal</button>
+        <button class="tab"        id="tab-conn">Connect Existing</button>
       </div>
-      <div class="form-group">
-        <label>Confirm Password</label>
-        <input type="password" id="setup-pw2" autocomplete="new-password"/>
+
+      <!-- NEW JOURNAL -->
+      <div id="form-new">
+        <h3>Create Your Journal</h3>
+        <p class="asub">Set a password and connect your GitHub account. Your posts will be saved to a <strong>secret private Gist</strong> — invisible to everyone but you.</p>
+        <div class="fg">
+          <label>Password <span style="color:var(--muted)">(min. 8 characters)</span></label>
+          <input type="password" id="n-pw1" autocomplete="new-password" placeholder="Choose a strong password"/>
+        </div>
+        <div class="fg">
+          <label>Confirm Password</label>
+          <input type="password" id="n-pw2" autocomplete="new-password"/>
+        </div>
+        <div class="fg">
+          <label>GitHub Personal Access Token</label>
+          <input type="password" id="n-token" autocomplete="off" placeholder="ghp_..."/>
+          <div class="hint">⚠ Needs <strong>gist</strong> scope. <a href="https://github.com/settings/tokens/new?scopes=gist&description=DiZazzo+Journal" target="_blank" rel="noopener" style="color:var(--accent)">Create one here →</a></div>
+        </div>
+        <div class="ferr" id="n-err"></div>
+        <button class="btn-auth" id="btn-create">Create Journal</button>
       </div>
-      <div class="form-error" id="setup-error"></div>
-      <button class="btn-auth" id="setup-btn">Create Password &amp; Enter</button>
-    </div>
-  </div>
 
-  <!-- 2. LOGIN -->
-  <div class="auth-screen" id="screen-login" style="display:none;">
-    <div class="auth-card">
-      <div class="auth-icon">🔐</div>
-      <h3>Private Journal</h3>
-      <p class="sub">This space is just for you.</p>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="login-pw" autocomplete="current-password"/>
+      <!-- CONNECT EXISTING -->
+      <div id="form-conn" style="display:none">
+        <h3>Connect Your Journal</h3>
+        <p class="asub">Already have a journal on another device? Enter your credentials and Gist ID to sync your posts here.</p>
+        <div class="fg">
+          <label>Password</label>
+          <input type="password" id="c-pw" autocomplete="current-password"/>
+        </div>
+        <div class="fg">
+          <label>GitHub Token</label>
+          <input type="password" id="c-token" autocomplete="off" placeholder="ghp_..."/>
+        </div>
+        <div class="fg">
+          <label>Gist ID</label>
+          <input type="text" id="c-gist" placeholder="e.g. a1b2c3d4e5f6..."/>
+          <div class="hint">You received this when you first created your journal.</div>
+        </div>
+        <div class="ferr" id="c-err"></div>
+        <button class="btn-auth" id="btn-conn">Connect &amp; Unlock</button>
+        <div class="lockout-bar" id="lock-msg" style="display:none"></div>
       </div>
-      <div class="form-error" id="login-error"></div>
-      <button class="btn-auth" id="login-btn">Unlock</button>
-      <div class="lockout-msg" id="lockout-msg" style="display:none;"></div>
-    </div>
-  </div>
 
-  <!-- 3. DASHBOARD -->
-  <div id="blog-dashboard">
-    <div class="blog-header">
-      <div class="blog-header-left">
-        <h3>My Journal</h3>
-        <div class="sub" id="post-count-label"></div>
+      <!-- LOGIN (shown when returning on same device) -->
+      <div id="form-login" style="display:none">
+        <h3>Welcome Back</h3>
+        <p class="asub">Enter your password to access your journal.</p>
+        <div class="fg">
+          <label>Password</label>
+          <input type="password" id="l-pw" autocomplete="current-password"/>
+        </div>
+        <div class="ferr" id="l-err"></div>
+        <button class="btn-auth" id="btn-login">Unlock Journal</button>
+        <div class="lockout-bar" id="l-lock-msg" style="display:none"></div>
+        <p style="margin-top:1.2rem;font-size:.8rem;text-align:center">
+          <a href="#" id="switch-to-conn" style="color:var(--muted)">Using a new device?</a>
+        </p>
       </div>
-      <button class="btn-new" id="new-post-btn">✦ New Entry</button>
     </div>
-    <div class="posts-list" id="posts-list"></div>
   </div>
 
-  <!-- 4. EDITOR -->
-  <div id="post-editor">
-    <div class="editor-topbar">
-      <button class="btn-back" id="editor-back-btn">← Back</button>
-      <span class="editor-mode" id="editor-mode-label">New Entry</span>
-    </div>
-    <input type="text" class="editor-title" id="post-title" placeholder="Entry title…"/>
-    <div class="editor-meta-row">
-      <input type="text" id="post-tags" placeholder="Tags: ideas, finance, career…"/>
-    </div>
-    <div class="editor-toolbar">
-      <button class="tbtn" id="tb-bold"><b>B</b></button>
-      <button class="tbtn" id="tb-italic"><i>I</i></button>
-      <button class="tbtn" id="tb-h2">H2</button>
-      <button class="tbtn" id="tb-h3">H3</button>
-      <button class="tbtn" id="tb-list">List</button>
-      <button class="tbtn" id="tb-quote">Quote</button>
-      <button class="tbtn" id="tb-hr">──</button>
-    </div>
-    <textarea id="post-body" placeholder="Write your thoughts here…"></textarea>
-    <div class="editor-footer">
-      <div class="editor-footer-left">
-        <button class="btn-save" id="save-post-btn">✓ Save Entry</button>
-        <button class="btn-del"  id="delete-post-btn" style="display:none;">Delete</button>
+  <!-- GIST ID REVEAL (shown once after setup) -->
+  <div class="ascreen" id="s-reveal" style="display:none">
+    <div class="acard">
+      <h3>🎉 Journal Created!</h3>
+      <p class="asub">Your journal is ready. <strong>Save this Gist ID</strong> — you'll need it to access your journal from a new device.</p>
+      <div class="fg">
+        <label>Your Gist ID</label>
+        <input type="text" id="reveal-gist" readonly style="font-family:monospace;font-size:.85rem;cursor:text"/>
       </div>
-      <span class="save-status" id="save-status"></span>
+      <p style="color:var(--warn);font-size:.82rem;margin-bottom:1.5rem">⚠ Screenshot or copy this now. It will not be shown again.</p>
+      <button class="btn-auth" id="btn-reveal-ok">I've saved it — Enter Journal</button>
     </div>
   </div>
 
-  <!-- 5. VIEWER -->
-  <div id="post-viewer">
-    <div style="display:flex;gap:0.8rem;margin-bottom:1.5rem;align-items:center;">
-      <button class="btn-back" id="viewer-back-btn">← Back</button>
-      <button class="btn-sm"   id="viewer-edit-btn">✎ Edit</button>
+  <!-- DASHBOARD -->
+  <div id="j-dash">
+    <div class="j-head">
+      <div><h3>My Journal</h3><div class="sub" id="j-count"></div></div>
+      <button class="btn-new" id="btn-new-post">✦ New Entry</button>
     </div>
-    <div class="viewer-title" id="viewer-title"></div>
-    <div class="viewer-meta"  id="viewer-meta"></div>
-    <div class="post-tags"    id="viewer-tags"></div>
-    <div style="margin-top:1.5rem;" class="viewer-body" id="viewer-body"></div>
-    <div class="viewer-actions">
-      <button class="btn-del" id="viewer-delete-btn">Delete</button>
+    <div class="posts" id="posts-list"></div>
+  </div>
+
+  <!-- EDITOR -->
+  <div id="j-edit">
+    <div class="etop">
+      <button class="btn-back" id="e-back">← Back</button>
+      <span class="emode" id="e-mode">New Entry</span>
+    </div>
+    <input type="text" class="etitle" id="e-title" placeholder="Entry title…"/>
+    <div class="emeta">
+      <input type="text" id="e-tags" placeholder="Tags: ideas, finance, career…"/>
+    </div>
+    <div class="etoolbar">
+      <button class="tb" id="tb-b"><b>B</b></button>
+      <button class="tb" id="tb-i"><i>I</i></button>
+      <button class="tb" id="tb-h2">H2</button>
+      <button class="tb" id="tb-h3">H3</button>
+      <button class="tb" id="tb-ul">List</button>
+      <button class="tb" id="tb-qt">Quote</button>
+      <button class="tb" id="tb-hr">──</button>
+    </div>
+    <textarea id="pbody" placeholder="Write your thoughts here…"></textarea>
+    <div class="efoot">
+      <div class="efoot-l">
+        <button class="btn-save" id="btn-save">✓ Save Entry</button>
+        <button class="btn-del"  id="btn-del"  style="display:none">Delete</button>
+      </div>
+      <span class="sstatus" id="sstatus"></span>
     </div>
   </div>
 
+  <!-- VIEWER -->
+  <div id="j-view">
+    <div style="display:flex;gap:.8rem;margin-bottom:1.5rem;align-items:center">
+      <button class="btn-back" id="v-back">← Back</button>
+      <button class="btn-sm"   id="v-edit">✎ Edit</button>
+    </div>
+    <div class="vt" id="v-title"></div>
+    <div class="vm" id="v-meta"></div>
+    <div class="ptags" id="v-tags"></div>
+    <div class="vb" id="v-body" style="margin-top:1.5rem"></div>
+    <div class="vact">
+      <button class="btn-del" id="v-del">Delete</button>
+    </div>
+  </div>
 </div>
 
-<!-- Change password modal -->
+<!-- CHANGE PASSWORD MODAL -->
 <div class="modal-bg" id="pw-modal">
   <div class="modal">
     <h3>Change Password</h3>
-    <div class="form-group">
-      <label>Current Password</label>
-      <input type="password" id="cpw-current" autocomplete="current-password"/>
-    </div>
-    <div class="form-group">
-      <label>New Password <span style="color:var(--muted)">(min. 8 chars)</span></label>
-      <input type="password" id="cpw-new" autocomplete="new-password"/>
-    </div>
-    <div class="form-group">
-      <label>Confirm New Password</label>
-      <input type="password" id="cpw-confirm" autocomplete="new-password"/>
-    </div>
-    <div class="form-error" id="cpw-error"></div>
-    <div style="display:flex;gap:0.8rem;margin-top:0.5rem;">
-      <button class="btn-save" id="cpw-save-btn">Save</button>
-      <button class="btn-close" id="cpw-cancel-btn">Cancel</button>
+    <div class="fg"><label>Current Password</label><input type="password" id="cp-cur" autocomplete="current-password"/></div>
+    <div class="fg"><label>New Password <span style="color:var(--muted)">(min. 8 chars)</span></label><input type="password" id="cp-new" autocomplete="new-password"/></div>
+    <div class="fg"><label>Confirm New Password</label><input type="password" id="cp-con" autocomplete="new-password"/></div>
+    <div class="ferr" id="cp-err"></div>
+    <div style="display:flex;gap:.8rem;margin-top:.5rem">
+      <button class="btn-save" id="cp-save">Save</button>
+      <button class="btn-close" id="cp-cancel">Cancel</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════ SCRIPTS ═══════════ -->
 <script>
 'use strict';
-/* ────────────────────────────────────────────────
-   SCROLL PROGRESS BAR
-──────────────────────────────────────────────── */
+
+/* ── SCROLL PROGRESS ── */
 window.addEventListener('scroll', () => {
-  const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-  document.getElementById('scroll-progress').style.width = pct + '%';
+  document.getElementById('sp').style.width =
+    (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
 }, { passive: true });
 
-/* ────────────────────────────────────────────────
-   FADE-IN ON SCROLL (Intersection Observer)
-──────────────────────────────────────────────── */
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+/* ── FADE IN ── */
+const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } }), { threshold: 0.1 });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
 
-/* ────────────────────────────────────────────────
-   MOBILE NAV
-──────────────────────────────────────────────── */
-const hamburger  = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-document.querySelectorAll('.mm-link').forEach(a => {
-  a.addEventListener('click', () => mobileMenu.classList.remove('open'));
-});
+/* ── MOBILE NAV ── */
+const hbg = document.getElementById('hbg'), mm = document.getElementById('mm');
+hbg.addEventListener('click', () => mm.classList.toggle('open'));
+document.querySelectorAll('.mml').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
 
-/* ────────────────────────────────────────────────
-   SECURITY — SHA-256 via Web Crypto
-──────────────────────────────────────────────── */
+/* ── TOAST ── */
+let toastTimer;
+function toast(msg, type = 'ok') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.className = '', 3000);
+}
+
+/* ══════════════════════════════════════════
+   CRYPTO HELPERS
+══════════════════════════════════════════ */
 async function sha256(text) {
-  const buf  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
+function b64e(u8) { return btoa(String.fromCharCode(...u8)); }
+function b64d(s)  { return Uint8Array.from(atob(s), c => c.charCodeAt(0)); }
 
-/* ────────────────────────────────────────────────
+async function deriveKey(password, salt) {
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({ name:'PBKDF2', salt, iterations:100000, hash:'SHA-256' }, km, { name:'AES-GCM', length:256 }, false, ['encrypt','decrypt']);
+}
+async function encryptText(password, plaintext) {
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv   = crypto.getRandomValues(new Uint8Array(12));
+  const key  = await deriveKey(password, salt);
+  const enc  = await crypto.subtle.encrypt({ name:'AES-GCM', iv }, key, new TextEncoder().encode(plaintext));
+  return JSON.stringify({ s: b64e(salt), i: b64e(iv), d: b64e(new Uint8Array(enc)) });
+}
+async function decryptText(password, stored) {
+  const { s, i, d } = JSON.parse(stored);
+  const key = await deriveKey(password, b64d(s));
+  const dec = await crypto.subtle.decrypt({ name:'AES-GCM', iv: b64d(i) }, key, b64d(d));
+  return new TextDecoder().decode(dec);
+}
+
+/* ══════════════════════════════════════════
    STORAGE KEYS
-──────────────────────────────────────────────── */
+══════════════════════════════════════════ */
 const K = {
-  PW:       'dzc_pw_hash',
-  POSTS:    'dzc_posts',
-  ATTEMPTS: 'dzc_attempts',
-  LOCKOUT:  'dzc_lockout',
-  SESSION:  'dzc_session',
+  PW_HASH:   'dzc_pw',
+  ENC_TOKEN: 'dzc_et',
+  GIST_ID:   'dzc_gid',
+  ATTEMPTS:  'dzc_att',
+  LOCKOUT:   'dzc_lk',
+  SESSION:   'dzc_sess',
 };
-const MAX_ATTEMPTS   = 5;
-const LOCKOUT_MS     = 15 * 60 * 1000;  // 15 minutes
-const SESSION_TTL_MS = 30 * 60 * 1000;  // 30 minutes idle
+const MAX_ATT    = 5;
+const LOCK_MS    = 15 * 60 * 1000;
+const SESS_MS    = 30 * 60 * 1000;
 
-/* ── helpers ── */
-function getPosts()   { try { return JSON.parse(localStorage.getItem(K.POSTS) || '[]'); } catch { return []; } }
-function savePosts(p) { localStorage.setItem(K.POSTS, JSON.stringify(p)); }
-function isFirstUse() { return !localStorage.getItem(K.PW); }
-
-function isLockedOut() {
-  const until = parseInt(localStorage.getItem(K.LOCKOUT) || '0', 10);
-  return Date.now() < until;
-}
-function getLockoutRemaining() {
-  const until = parseInt(localStorage.getItem(K.LOCKOUT) || '0', 10);
-  return Math.max(0, Math.ceil((until - Date.now()) / 1000));
-}
-function recordAttempt() {
-  const n = (parseInt(localStorage.getItem(K.ATTEMPTS) || '0', 10)) + 1;
+function hasSetup()   { return !!localStorage.getItem(K.PW_HASH) && !!localStorage.getItem(K.ENC_TOKEN) && !!localStorage.getItem(K.GIST_ID); }
+function isLocked()   { return Date.now() < (parseInt(localStorage.getItem(K.LOCKOUT)||'0')); }
+function lockRemain() { return Math.max(0, Math.ceil((parseInt(localStorage.getItem(K.LOCKOUT)||'0') - Date.now()) / 1000)); }
+function addAttempt() {
+  const n = (parseInt(localStorage.getItem(K.ATTEMPTS)||'0')) + 1;
   localStorage.setItem(K.ATTEMPTS, n);
-  if (n >= MAX_ATTEMPTS) {
-    localStorage.setItem(K.LOCKOUT, Date.now() + LOCKOUT_MS);
-    localStorage.removeItem(K.ATTEMPTS);
-  }
+  if (n >= MAX_ATT) { localStorage.setItem(K.LOCKOUT, Date.now() + LOCK_MS); localStorage.removeItem(K.ATTEMPTS); }
   return n;
 }
-function clearAttempts() {
-  localStorage.removeItem(K.ATTEMPTS);
-  localStorage.removeItem(K.LOCKOUT);
-}
+function clearAttempts() { localStorage.removeItem(K.ATTEMPTS); localStorage.removeItem(K.LOCKOUT); }
 
 /* ── Session ── */
-let sessionTimer = null;
-function touchSession() {
-  localStorage.setItem(K.SESSION, Date.now() + SESSION_TTL_MS);
-  clearTimeout(sessionTimer);
-  sessionTimer = setTimeout(() => {
-    closeBlog();
-    alert('Your journal session expired after 30 minutes of inactivity.');
-  }, SESSION_TTL_MS);
+let sessionActive = false, sessTimer = null;
+function touchSess() {
+  localStorage.setItem(K.SESSION, Date.now() + SESS_MS);
+  clearTimeout(sessTimer);
+  sessTimer = setTimeout(() => { closeSilent(); toast('Session expired after 30 min of inactivity.', 'err'); }, SESS_MS);
 }
-function clearSession() {
-  localStorage.removeItem(K.SESSION);
-  clearTimeout(sessionTimer);
-}
-['keydown','mousemove','click','scroll'].forEach(ev =>
-  document.addEventListener(ev, () => { if (sessionActive) touchSession(); }, { passive: true })
+function clearSess() { localStorage.removeItem(K.SESSION); clearTimeout(sessTimer); sessionActive = false; }
+['keydown','mousemove','click'].forEach(ev =>
+  document.addEventListener(ev, () => { if (sessionActive) touchSess(); }, { passive: true })
 );
-let sessionActive = false;
 
-/* ────────────────────────────────────────────────
-   BLOG OPEN / CLOSE
-──────────────────────────────────────────────── */
-function openBlog(e) {
-  e.preventDefault();
-  document.getElementById('blog-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  isFirstUse() ? showSetup() : showLogin();
-}
-function closeBlog() {
-  document.getElementById('blog-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-  sessionActive = false;
-  clearSession();
-  showLogin(); // reset to login for next time
-  document.getElementById('login-pw').value = '';
-}
+/* ══════════════════════════════════════════
+   GIST API
+══════════════════════════════════════════ */
+const GIST_FILE = 'dizazzo-journal.json';
 
-document.getElementById('open-journal-btn').addEventListener('click', openBlog);
-document.getElementById('open-journal-mobile').addEventListener('click', openBlog);
-document.getElementById('close-journal-btn').addEventListener('click', closeBlog);
-
-/* ────────────────────────────────────────────────
-   SCREEN SWITCHING
-──────────────────────────────────────────────── */
-const screens = ['screen-setup','screen-login','blog-dashboard','post-editor','post-viewer'];
-function showScreen(id) {
-  screens.forEach(s => {
-    const el = document.getElementById(s);
-    if (el) el.style.display = (s === id) ? (s === 'blog-dashboard' || s === 'post-editor' || s === 'post-viewer' ? 'block' : 'flex') : 'none';
+async function gistCreate(token) {
+  const r = await fetch('https://api.github.com/gists', {
+    method: 'POST',
+    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ description: 'Di Zazzo Consulting — Private Journal', public: false, files: { [GIST_FILE]: { content: '[]' } } })
   });
-  // Show/hide settings btn in nav
-  const navRight = document.getElementById('blog-nav-right');
-  const inApp = ['blog-dashboard','post-editor','post-viewer'].includes(id);
-  const settingsBtn = document.getElementById('journal-settings-btn');
-  if (inApp && !settingsBtn) {
-    const btn = document.createElement('button');
-    btn.id = 'journal-settings-btn'; btn.className = 'btn-sm';
-    btn.textContent = '⚙ Password';
-    btn.addEventListener('click', openChangePw);
-    navRight.insertBefore(btn, navRight.firstChild);
-  } else if (!inApp && settingsBtn) {
-    settingsBtn.remove();
+  if (!r.ok) throw new Error('Failed to create Gist. Check your token has the gist scope.');
+  const g = await r.json();
+  return g.id;
+}
+async function gistLoad(token, gistId) {
+  const r = await fetch(`https://api.github.com/gists/${gistId}`, {
+    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+  });
+  if (!r.ok) throw new Error('Could not load posts. Check your Gist ID and token.');
+  const g = await r.json();
+  const raw = g.files[GIST_FILE]?.content || '[]';
+  return JSON.parse(raw);
+}
+async function gistSave(token, gistId, posts) {
+  const r = await fetch(`https://api.github.com/gists/${gistId}`, {
+    method: 'PATCH',
+    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ files: { [GIST_FILE]: { content: JSON.stringify(posts) } } })
+  });
+  if (!r.ok) throw new Error('Failed to save posts to Gist.');
+}
+
+/* ── in-memory state (only while session is active) ── */
+let gToken = null, gGistId = null, gPosts = [];
+
+async function getToken(password) {
+  return decryptText(password, localStorage.getItem(K.ENC_TOKEN));
+}
+
+/* ══════════════════════════════════════════
+   JOURNAL OPEN / CLOSE
+══════════════════════════════════════════ */
+function openJournal(e) {
+  e.preventDefault();
+  document.getElementById('jo').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (hasSetup()) {
+    showAuthForm('login');
+  } else {
+    showAuthForm('new');
   }
 }
-function showSetup()     { showScreen('screen-setup');    setTimeout(() => document.getElementById('setup-pw1').focus(), 80); }
-function showLogin()     { showScreen('screen-login');    setTimeout(() => document.getElementById('login-pw').focus(), 80); }
-function showDashboard() { showScreen('blog-dashboard');  renderPosts(); if (sessionActive) touchSession(); }
-function showEditor()    { showScreen('post-editor'); }
-function showViewer()    { showScreen('post-viewer'); }
+function closeJournal() {
+  document.getElementById('jo').classList.remove('open');
+  document.body.style.overflow = '';
+  gToken = null; gGistId = null;
+  clearSess();
+  if (hasSetup()) showAuthForm('login');
+  document.getElementById('l-pw').value = '';
+}
+function closeSilent() { closeJournal(); }
 
-/* ────────────────────────────────────────────────
-   FIRST-USE SETUP
-──────────────────────────────────────────────── */
-document.getElementById('setup-btn').addEventListener('click', async () => {
-  const p1  = document.getElementById('setup-pw1').value;
-  const p2  = document.getElementById('setup-pw2').value;
-  const err = document.getElementById('setup-error');
-  if (p1.length < 8) { err.textContent = 'Password must be at least 8 characters.'; return; }
-  if (p1 !== p2)     { err.textContent = 'Passwords do not match.'; return; }
+document.getElementById('open-j').addEventListener('click', openJournal);
+document.getElementById('open-j-m').addEventListener('click', openJournal);
+document.getElementById('close-j').addEventListener('click', closeJournal);
+
+/* ══════════════════════════════════════════
+   SCREEN SWITCHING
+══════════════════════════════════════════ */
+const SCREENS = ['s-auth','s-reveal','j-dash','j-edit','j-view'];
+function showScreen(id) {
+  SCREENS.forEach(s => {
+    const el = document.getElementById(s);
+    if (!el) return;
+    el.style.display = s === id ? (s === 'j-dash' || s === 'j-edit' || s === 'j-view' ? 'block' : 'flex') : 'none';
+  });
+  // Settings button in nav
+  const nr = document.getElementById('j-nav-r');
+  const inApp = ['j-dash','j-edit','j-view'].includes(id);
+  const existing = document.getElementById('j-settings-btn');
+  if (inApp && !existing) {
+    const btn = document.createElement('button');
+    btn.id = 'j-settings-btn'; btn.className = 'btn-sm';
+    btn.textContent = '⚙ Password';
+    btn.addEventListener('click', openCpw);
+    nr.insertBefore(btn, nr.firstChild);
+  } else if (!inApp && existing) {
+    existing.remove();
+  }
+}
+
+function showAuthForm(which) {
+  showScreen('s-auth');
+  const tabs  = document.getElementById('auth-tabs');
+  const fNew  = document.getElementById('form-new');
+  const fConn = document.getElementById('form-conn');
+  const fLog  = document.getElementById('form-login');
+  const tabN  = document.getElementById('tab-new');
+  const tabC  = document.getElementById('tab-conn');
+
+  if (which === 'login') {
+    tabs.style.display  = 'none';
+    fNew.style.display  = 'none';
+    fConn.style.display = 'none';
+    fLog.style.display  = 'block';
+    setTimeout(() => document.getElementById('l-pw').focus(), 80);
+  } else if (which === 'new') {
+    tabs.style.display  = 'flex';
+    fNew.style.display  = 'block';
+    fConn.style.display = 'none';
+    fLog.style.display  = 'none';
+    tabN.classList.add('active'); tabC.classList.remove('active');
+  } else {
+    tabs.style.display  = 'flex';
+    fNew.style.display  = 'none';
+    fConn.style.display = 'block';
+    fLog.style.display  = 'none';
+    tabC.classList.add('active'); tabN.classList.remove('active');
+  }
+}
+
+/* Tab switching */
+document.getElementById('tab-new').addEventListener('click', () => showAuthForm('new'));
+document.getElementById('tab-conn').addEventListener('click', () => showAuthForm('connect'));
+document.getElementById('switch-to-conn').addEventListener('click', e => { e.preventDefault(); showAuthForm('connect'); });
+
+/* ══════════════════════════════════════════
+   CREATE NEW JOURNAL
+══════════════════════════════════════════ */
+document.getElementById('btn-create').addEventListener('click', async () => {
+  const pw1   = document.getElementById('n-pw1').value;
+  const pw2   = document.getElementById('n-pw2').value;
+  const token = document.getElementById('n-token').value.trim();
+  const err   = document.getElementById('n-err');
   err.textContent = '';
-  localStorage.setItem(K.PW, await sha256(p1));
-  unlockJournal();
-});
-document.getElementById('setup-pw2').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('setup-btn').click(); });
 
-/* ────────────────────────────────────────────────
-   LOGIN
-──────────────────────────────────────────────── */
-document.getElementById('login-btn').addEventListener('click', doLogin);
-document.getElementById('login-pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  if (pw1.length < 8)  { err.textContent = 'Password must be at least 8 characters.'; return; }
+  if (pw1 !== pw2)     { err.textContent = 'Passwords do not match.'; return; }
+  if (!token)          { err.textContent = 'GitHub token is required.'; return; }
+
+  const btn = document.getElementById('btn-create');
+  btn.disabled = true; btn.textContent = 'Creating…';
+  try {
+    const gistId   = await gistCreate(token);
+    const pwHash   = await sha256(pw1);
+    const encToken = await encryptText(pw1, token);
+    localStorage.setItem(K.PW_HASH,   pwHash);
+    localStorage.setItem(K.ENC_TOKEN, encToken);
+    localStorage.setItem(K.GIST_ID,   gistId);
+
+    document.getElementById('reveal-gist').value = gistId;
+    showScreen('s-reveal');
+  } catch(ex) {
+    err.textContent = ex.message;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Create Journal';
+  }
+});
+
+document.getElementById('btn-reveal-ok').addEventListener('click', async () => {
+  await unlockAndEnter(
+    document.getElementById('n-pw1').value,
+    document.getElementById('n-token').value.trim(),
+    localStorage.getItem(K.GIST_ID)
+  );
+});
+
+/* ══════════════════════════════════════════
+   CONNECT EXISTING JOURNAL (new device)
+══════════════════════════════════════════ */
+document.getElementById('btn-conn').addEventListener('click', async () => {
+  const pw    = document.getElementById('c-pw').value;
+  const token = document.getElementById('c-token').value.trim();
+  const gid   = document.getElementById('c-gist').value.trim();
+  const err   = document.getElementById('c-err');
+  err.textContent = '';
+
+  if (!pw)    { err.textContent = 'Password is required.'; return; }
+  if (!token) { err.textContent = 'GitHub token is required.'; return; }
+  if (!gid)   { err.textContent = 'Gist ID is required.'; return; }
+
+  const btn = document.getElementById('btn-conn');
+  btn.disabled = true; btn.textContent = 'Connecting…';
+  try {
+    // Verify token + gist work
+    await gistLoad(token, gid);
+    // All good — store credentials
+    const pwHash   = await sha256(pw);
+    const encToken = await encryptText(pw, token);
+    localStorage.setItem(K.PW_HASH,   pwHash);
+    localStorage.setItem(K.ENC_TOKEN, encToken);
+    localStorage.setItem(K.GIST_ID,   gid);
+    await unlockAndEnter(pw, token, gid);
+  } catch(ex) {
+    err.textContent = ex.message;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Connect & Unlock';
+  }
+});
+
+/* ══════════════════════════════════════════
+   LOGIN (returning user, same device)
+══════════════════════════════════════════ */
+document.getElementById('btn-login').addEventListener('click', doLogin);
+document.getElementById('l-pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 
 async function doLogin() {
-  if (isLockedOut()) { showLockout(); return; }
-  const pw  = document.getElementById('login-pw').value;
-  const err = document.getElementById('login-error');
-  const hash = await sha256(pw);
-  if (hash === localStorage.getItem(K.PW)) {
-    err.textContent = '';
-    document.getElementById('login-pw').value = '';
-    clearAttempts();
-    unlockJournal();
-  } else {
-    const n = recordAttempt();
-    if (isLockedOut()) {
-      showLockout();
-    } else {
-      err.textContent = `Incorrect password. ${MAX_ATTEMPTS - n} attempt${MAX_ATTEMPTS - n !== 1 ? 's' : ''} remaining.`;
-      document.getElementById('login-pw').value = '';
-      document.getElementById('login-pw').focus();
+  if (isLocked()) { showLockUI(); return; }
+  const pw  = document.getElementById('l-pw').value;
+  const err = document.getElementById('l-err');
+  err.textContent = '';
+
+  const btn = document.getElementById('btn-login');
+  btn.disabled = true; btn.textContent = 'Unlocking…';
+  try {
+    const hash = await sha256(pw);
+    if (hash !== localStorage.getItem(K.PW_HASH)) {
+      const n = addAttempt();
+      if (isLocked()) { showLockUI(); }
+      else { err.textContent = `Incorrect password. ${MAX_ATT - n} attempt${MAX_ATT - n !== 1 ? 's' : ''} remaining.`; }
+      document.getElementById('l-pw').value = '';
+      return;
     }
+    clearAttempts();
+    const token  = await getToken(pw);
+    const gistId = localStorage.getItem(K.GIST_ID);
+    await unlockAndEnter(pw, token, gistId);
+  } catch(ex) {
+    err.textContent = 'Decryption failed. Wrong password?';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Unlock Journal';
+    document.getElementById('l-pw').value = '';
   }
 }
 
-function showLockout() {
-  const btn  = document.getElementById('login-btn');
-  const lock = document.getElementById('lockout-msg');
-  btn.disabled = true; lock.style.display = 'block';
-  const interval = setInterval(() => {
-    if (!isLockedOut()) {
-      btn.disabled = false; lock.style.display = 'none';
-      document.getElementById('login-error').textContent = '';
-      clearInterval(interval);
-    } else {
-      const s = getLockoutRemaining();
-      lock.textContent = `Too many attempts. Try again in ${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}.`;
-    }
+function showLockUI() {
+  const btn = document.getElementById('btn-login');
+  const lk  = document.getElementById('l-lock-msg');
+  btn.disabled = true; lk.style.display = 'block';
+  const iv = setInterval(() => {
+    if (!isLocked()) { btn.disabled = false; lk.style.display = 'none'; clearInterval(iv); }
+    else { const s = lockRemain(); lk.textContent = `Too many attempts. Try again in ${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}.`; }
   }, 500);
 }
 
-function unlockJournal() {
+/* ══════════════════════════════════════════
+   UNLOCK AND LOAD
+══════════════════════════════════════════ */
+async function unlockAndEnter(pw, token, gistId) {
+  gToken  = token;
+  gGistId = gistId;
   sessionActive = true;
-  touchSession();
-  showDashboard();
+  touchSess();
+  showScreen('j-dash');
+  await loadAndRender();
 }
 
-/* ────────────────────────────────────────────────
-   CHANGE PASSWORD
-──────────────────────────────────────────────── */
-function openChangePw() {
-  ['cpw-current','cpw-new','cpw-confirm'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('cpw-error').textContent = '';
-  document.getElementById('pw-modal').classList.add('open');
-}
-document.getElementById('cpw-cancel-btn').addEventListener('click', () => document.getElementById('pw-modal').classList.remove('open'));
-document.getElementById('cpw-save-btn').addEventListener('click', async () => {
-  const cur  = document.getElementById('cpw-current').value;
-  const nw   = document.getElementById('cpw-new').value;
-  const conf = document.getElementById('cpw-confirm').value;
-  const err  = document.getElementById('cpw-error');
-  const curHash = await sha256(cur);
-  if (curHash !== localStorage.getItem(K.PW)) { err.textContent = 'Current password is incorrect.'; return; }
-  if (nw.length < 8) { err.textContent = 'New password must be at least 8 characters.'; return; }
-  if (nw !== conf)   { err.textContent = 'Passwords do not match.'; return; }
-  localStorage.setItem(K.PW, await sha256(nw));
-  document.getElementById('pw-modal').classList.remove('open');
-  alert('Password updated successfully.');
-});
-
-/* ────────────────────────────────────────────────
+/* ══════════════════════════════════════════
    RENDER POSTS
-──────────────────────────────────────────────── */
-function renderPosts() {
-  const posts  = getPosts().sort((a, b) => b.date - a.date);
-  const list   = document.getElementById('posts-list');
-  const label  = document.getElementById('post-count-label');
-  label.textContent = posts.length === 0 ? 'No entries yet.' : `${posts.length} entr${posts.length === 1 ? 'y' : 'ies'}`;
+══════════════════════════════════════════ */
+async function loadAndRender() {
+  const list  = document.getElementById('posts-list');
+  const label = document.getElementById('j-count');
+  list.innerHTML = `<div class="loading"><div class="spinner"></div>Loading from GitHub…</div>`;
+  try {
+    gPosts = await gistLoad(gToken, gGistId);
+    renderPosts();
+  } catch(ex) {
+    list.innerHTML = `<div class="empty"><div class="ei">⚠️</div><p>${esc(ex.message)}</p></div>`;
+  }
+}
 
+function renderPosts() {
+  const posts = [...gPosts].sort((a,b) => b.date - a.date);
+  const list  = document.getElementById('posts-list');
+  const label = document.getElementById('j-count');
+  label.textContent = posts.length === 0 ? 'No entries yet.' : `${posts.length} entr${posts.length===1?'y':'ies'}`;
   if (posts.length === 0) {
-    list.innerHTML = `<div class="empty-state"><div class="ei">📓</div><p>Your journal is empty.<br>Write your first entry.</p></div>`;
+    list.innerHTML = `<div class="empty"><div class="ei">📓</div><p>Your journal is empty.<br>Write your first entry.</p></div>`;
     return;
   }
   list.innerHTML = '';
   posts.forEach(p => {
-    const preview = p.body.slice(0, 160).replace(/\n/g, ' ') + (p.body.length > 160 ? '…' : '');
-    const dateStr = new Date(p.date).toLocaleDateString('en-CA', { year:'numeric', month:'short', day:'numeric' });
+    const preview = p.body.slice(0,160).replace(/\n/g,' ') + (p.body.length>160?'…':'');
+    const dateStr = new Date(p.date).toLocaleDateString('en-CA',{year:'numeric',month:'short',day:'numeric'});
     const card = document.createElement('div');
-    card.className = 'post-card';
+    card.className = 'pc';
     card.innerHTML = `
-      <div class="post-card-header">
-        <div class="post-card-title">${esc(p.title || 'Untitled')}</div>
-        <div class="post-card-date">${dateStr}</div>
-      </div>
-      <div class="post-card-preview">${esc(preview)}</div>
-      ${(p.tags||[]).length ? `<div class="post-tags">${(p.tags||[]).map(t=>`<span class="post-tag">${esc(t)}</span>`).join('')}</div>` : ''}
+      <div class="pc-head"><div class="pc-title">${esc(p.title||'Untitled')}</div><div class="pc-date">${dateStr}</div></div>
+      <div class="pc-prev">${esc(preview)}</div>
+      ${(p.tags||[]).length ? `<div class="ptags">${(p.tags||[]).map(t=>`<span class="ptag">${esc(t)}</span>`).join('')}</div>` : ''}
     `;
     card.addEventListener('click', () => viewPost(p.id));
     list.appendChild(card);
   });
 }
 
-/* ────────────────────────────────────────────────
-   NEW / EDIT / SAVE / DELETE
-──────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   NEW POST
+══════════════════════════════════════════ */
 let currentId = null;
 
-document.getElementById('new-post-btn').addEventListener('click', () => {
+document.getElementById('btn-new-post').addEventListener('click', () => {
   currentId = null;
-  document.getElementById('post-title').value = '';
-  document.getElementById('post-tags').value  = '';
-  document.getElementById('post-body').value  = '';
-  document.getElementById('editor-mode-label').textContent = 'New Entry';
-  document.getElementById('delete-post-btn').style.display = 'none';
-  document.getElementById('save-status').textContent = '';
-  showEditor();
-  setTimeout(() => document.getElementById('post-title').focus(), 80);
+  document.getElementById('e-title').value = '';
+  document.getElementById('e-tags').value  = '';
+  document.getElementById('pbody').value   = '';
+  document.getElementById('e-mode').textContent = 'New Entry';
+  document.getElementById('btn-del').style.display = 'none';
+  document.getElementById('sstatus').textContent = '';
+  showScreen('j-edit');
+  setTimeout(() => document.getElementById('e-title').focus(), 80);
 });
 
-document.getElementById('editor-back-btn').addEventListener('click', showDashboard);
-document.getElementById('viewer-back-btn').addEventListener('click', showDashboard);
+/* ══════════════════════════════════════════
+   SAVE POST
+══════════════════════════════════════════ */
+document.getElementById('btn-save').addEventListener('click', async () => {
+  const title = document.getElementById('e-title').value.trim();
+  const body  = document.getElementById('pbody').value;
+  const tags  = document.getElementById('e-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  if (!title && !body) { document.getElementById('sstatus').textContent = 'Nothing to save.'; return; }
 
-document.getElementById('save-post-btn').addEventListener('click', () => {
-  const title = document.getElementById('post-title').value.trim();
-  const body  = document.getElementById('post-body').value;
-  const tags  = document.getElementById('post-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
-  if (!title && !body) { document.getElementById('save-status').textContent = 'Nothing to save.'; return; }
-  const posts = getPosts();
-  if (currentId) {
-    const i = posts.findIndex(p => p.id === currentId);
-    if (i !== -1) Object.assign(posts[i], { title, body, tags, updated: Date.now() });
-  } else {
-    const entry = { id: 'p' + Date.now(), title, body, tags, date: Date.now() };
-    currentId = entry.id;
-    posts.push(entry);
-    document.getElementById('delete-post-btn').style.display = 'inline-flex';
-    document.getElementById('editor-mode-label').textContent = 'Edit Entry';
+  const btn = document.getElementById('btn-save');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  try {
+    if (currentId) {
+      const i = gPosts.findIndex(p => p.id === currentId);
+      if (i !== -1) Object.assign(gPosts[i], { title, body, tags, updated: Date.now() });
+    } else {
+      const entry = { id: 'p'+Date.now(), title, body, tags, date: Date.now() };
+      currentId = entry.id;
+      gPosts.push(entry);
+      document.getElementById('btn-del').style.display = 'inline-flex';
+      document.getElementById('e-mode').textContent = 'Edit Entry';
+    }
+    await gistSave(gToken, gGistId, gPosts);
+    document.getElementById('sstatus').textContent = '✓ Saved to GitHub';
+    setTimeout(() => document.getElementById('sstatus').textContent = '', 3000);
+    touchSess();
+  } catch(ex) {
+    toast(ex.message, 'err');
+  } finally {
+    btn.disabled = false; btn.textContent = '✓ Save Entry';
   }
-  savePosts(posts);
-  document.getElementById('save-status').textContent = '✓ Saved';
-  setTimeout(() => document.getElementById('save-status').textContent = '', 2500);
-  touchSession();
 });
 
-document.getElementById('delete-post-btn').addEventListener('click', () => {
-  if (!currentId || !confirm('Delete this entry permanently?')) return;
-  savePosts(getPosts().filter(p => p.id !== currentId));
-  currentId = null; showDashboard();
-});
-document.getElementById('viewer-delete-btn').addEventListener('click', () => {
+/* ══════════════════════════════════════════
+   DELETE POST
+══════════════════════════════════════════ */
+async function deleteById(id) {
   if (!confirm('Delete this entry permanently?')) return;
-  savePosts(getPosts().filter(p => p.id !== currentId));
-  currentId = null; showDashboard();
-});
+  gPosts = gPosts.filter(p => p.id !== id);
+  try {
+    await gistSave(gToken, gGistId, gPosts);
+    toast('Entry deleted.', 'ok');
+  } catch(ex) {
+    toast(ex.message, 'err');
+  }
+  currentId = null; showScreen('j-dash'); renderPosts();
+}
+document.getElementById('btn-del').addEventListener('click', () => deleteById(currentId));
+document.getElementById('v-del').addEventListener('click',   () => deleteById(currentId));
 
-/* ────────────────────────────────────────────────
-   VIEW / EDIT FROM VIEWER
-──────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   VIEW POST
+══════════════════════════════════════════ */
 function viewPost(id) {
-  const p = getPosts().find(x => x.id === id);
+  const p = gPosts.find(x => x.id === id);
   if (!p) return;
   currentId = id;
-  document.getElementById('viewer-title').textContent = p.title || 'Untitled';
-  document.getElementById('viewer-meta').textContent  = new Date(p.date).toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-  document.getElementById('viewer-body').textContent  = p.body;
-  const tagsEl = document.getElementById('viewer-tags');
-  tagsEl.innerHTML = (p.tags||[]).map(t=>`<span class="post-tag">${esc(t)}</span>`).join('');
-  showViewer();
+  document.getElementById('v-title').textContent = p.title || 'Untitled';
+  document.getElementById('v-meta').textContent  = new Date(p.date).toLocaleDateString('en-CA',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('v-body').textContent  = p.body;
+  const te = document.getElementById('v-tags');
+  te.innerHTML = (p.tags||[]).map(t=>`<span class="ptag">${esc(t)}</span>`).join('');
+  showScreen('j-view');
 }
 
-document.getElementById('viewer-edit-btn').addEventListener('click', () => {
-  const p = getPosts().find(x => x.id === currentId);
+document.getElementById('v-edit').addEventListener('click', () => {
+  const p = gPosts.find(x => x.id === currentId);
   if (!p) return;
-  document.getElementById('post-title').value = p.title || '';
-  document.getElementById('post-tags').value  = (p.tags||[]).join(', ');
-  document.getElementById('post-body').value  = p.body || '';
-  document.getElementById('editor-mode-label').textContent = 'Edit Entry';
-  document.getElementById('delete-post-btn').style.display = 'inline-flex';
-  document.getElementById('save-status').textContent = '';
-  showEditor();
+  document.getElementById('e-title').value = p.title||'';
+  document.getElementById('e-tags').value  = (p.tags||[]).join(', ');
+  document.getElementById('pbody').value   = p.body||'';
+  document.getElementById('e-mode').textContent = 'Edit Entry';
+  document.getElementById('btn-del').style.display = 'inline-flex';
+  document.getElementById('sstatus').textContent = '';
+  showScreen('j-edit');
 });
 
-/* ────────────────────────────────────────────────
-   EDITOR TOOLBAR
-──────────────────────────────────────────────── */
-function insertFmt(before, after) {
-  const ta = document.getElementById('post-body');
-  const s = ta.selectionStart, e = ta.selectionEnd;
-  const sel = ta.value.substring(s, e) || 'text';
-  ta.value = ta.value.substring(0,s) + before + sel + after + ta.value.substring(e);
-  ta.focus(); ta.selectionStart = s + before.length; ta.selectionEnd = s + before.length + sel.length;
-}
-function insertLine(prefix) {
-  const ta = document.getElementById('post-body');
-  const s = ta.selectionStart;
-  const before = ta.value.substring(0, s), after = ta.value.substring(s);
-  const nl = before.length > 0 && before[before.length-1] !== '\n' ? '\n' : '';
-  ta.value = before + nl + prefix + after;
-  const pos = before.length + nl.length + prefix.length;
-  ta.focus(); ta.selectionStart = ta.selectionEnd = pos;
-}
-document.getElementById('tb-bold').addEventListener('click',  () => insertFmt('**','**'));
-document.getElementById('tb-italic').addEventListener('click', () => insertFmt('_','_'));
-document.getElementById('tb-h2').addEventListener('click',    () => insertLine('## '));
-document.getElementById('tb-h3').addEventListener('click',    () => insertLine('### '));
-document.getElementById('tb-list').addEventListener('click',  () => insertLine('- '));
-document.getElementById('tb-quote').addEventListener('click', () => insertLine('> '));
-document.getElementById('tb-hr').addEventListener('click',    () => insertLine('---\n'));
+/* ── Back buttons ── */
+document.getElementById('e-back').addEventListener('click', () => showScreen('j-dash'));
+document.getElementById('v-back').addEventListener('click', () => showScreen('j-dash'));
 
-/* ────────────────────────────────────────────────
-   ESCAPE UTILITY (XSS prevention)
-──────────────────────────────────────────────── */
-function esc(s) {
-  return String(s)
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;').replace(/"/g,'&quot;')
-    .replace(/'/g,'&#39;');
+/* ══════════════════════════════════════════
+   TOOLBAR
+══════════════════════════════════════════ */
+function ifmt(b, a) {
+  const ta=document.getElementById('pbody'),s=ta.selectionStart,e=ta.selectionEnd;
+  const sel=ta.value.substring(s,e)||'text';
+  ta.value=ta.value.substring(0,s)+b+sel+a+ta.value.substring(e);
+  ta.focus();ta.selectionStart=s+b.length;ta.selectionEnd=s+b.length+sel.length;
 }
+function iline(p) {
+  const ta=document.getElementById('pbody'),s=ta.selectionStart;
+  const bef=ta.value.substring(0,s),aft=ta.value.substring(s);
+  const nl=bef.length>0&&bef[bef.length-1]!=='\n'?'\n':'';
+  ta.value=bef+nl+p+aft;const pos=bef.length+nl.length+p.length;
+  ta.focus();ta.selectionStart=ta.selectionEnd=pos;
+}
+document.getElementById('tb-b').addEventListener('click',  ()=>ifmt('**','**'));
+document.getElementById('tb-i').addEventListener('click',  ()=>ifmt('_','_'));
+document.getElementById('tb-h2').addEventListener('click', ()=>iline('## '));
+document.getElementById('tb-h3').addEventListener('click', ()=>iline('### '));
+document.getElementById('tb-ul').addEventListener('click', ()=>iline('- '));
+document.getElementById('tb-qt').addEventListener('click', ()=>iline('> '));
+document.getElementById('tb-hr').addEventListener('click', ()=>iline('---\n'));
 
-/* ────────────────────────────────────────────────
-   MIGRATION: hash any plaintext password left
-   from the old version of the site.
-──────────────────────────────────────────────── */
-(async () => {
-  const stored = localStorage.getItem(K.PW) || localStorage.getItem('jn_blog_pw');
-  if (stored && !/^[0-9a-f]{64}$/.test(stored)) {
-    // It's plaintext — hash it and save under new key
-    localStorage.setItem(K.PW, await sha256(stored));
-    localStorage.removeItem('jn_blog_pw'); // clean up old key
-  }
-})();
+/* ══════════════════════════════════════════
+   CHANGE PASSWORD
+══════════════════════════════════════════ */
+function openCpw() {
+  ['cp-cur','cp-new','cp-con'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('cp-err').textContent='';
+  document.getElementById('pw-modal').classList.add('open');
+}
+document.getElementById('cp-cancel').addEventListener('click', ()=>document.getElementById('pw-modal').classList.remove('open'));
+document.getElementById('cp-save').addEventListener('click', async () => {
+  const cur=document.getElementById('cp-cur').value;
+  const nw =document.getElementById('cp-new').value;
+  const con=document.getElementById('cp-con').value;
+  const err=document.getElementById('cp-err');
+  const h=await sha256(cur);
+  if (h!==localStorage.getItem(K.PW_HASH)){err.textContent='Current password is incorrect.';return;}
+  if (nw.length<8){err.textContent='New password must be at least 8 characters.';return;}
+  if (nw!==con){err.textContent='Passwords do not match.';return;}
+  // Re-encrypt token with new password
+  const newHash  = await sha256(nw);
+  const newEnc   = await encryptText(nw, gToken);
+  localStorage.setItem(K.PW_HASH, newHash);
+  localStorage.setItem(K.ENC_TOKEN, newEnc);
+  document.getElementById('pw-modal').classList.remove('open');
+  toast('Password updated successfully.', 'ok');
+});
+
+/* ══════════════════════════════════════════
+   XSS ESCAPE
+══════════════════════════════════════════ */
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 </script>
 </body>
 </html>
